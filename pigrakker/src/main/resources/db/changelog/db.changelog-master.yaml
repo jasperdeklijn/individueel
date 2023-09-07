@@ -4,7 +4,7 @@ databaseChangeLog:
        author:  Jasper
        changes:
          -  createTable:
-              tableName:  person
+              tableName:  users
               columns:
                 -  column:
                      name:  id
@@ -14,35 +14,24 @@ databaseChangeLog:
                        primaryKey:  true
                        nullable:  false
                 -  column:
-                     name:  firstname
+                     name:  username
                      type:  varchar(50)
                 -  column:
-                     name:  lastname
-                     type:  varchar(50)
+                     name:  password
+                     type: varchar(255)
                      constraints:
                        nullable:  false
-                -  column:
-                     name:  state
-                     type:  char(2)
 
-  -  changeSet:
-       id:  2
-       author:  Jasper
-       changes:
-         -  addColumn:
-              tableName:  person
-              columns:
-                -  column:
-                     name:  username
-                     type:  varchar(8)
-
-  -  changeSet:
-       id:  3
-       author:  Jasper
-       changes:
-         -  addLookupTable:
-              existingTableName:  person
-              existingColumnName:  state
-              newTableName:  state
-              newColumnName:  id
-              newColumnDataType:  char(2)
+  - changeSet:
+      id: 2
+      author: Jasper
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: password
+                  value: admin
