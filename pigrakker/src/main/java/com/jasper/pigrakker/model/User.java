@@ -1,11 +1,12 @@
-package com.jasper.pigrakker.model;
+package com.Jasper.pigrakker.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,6 +37,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> "read");
     }
+
 
     @Override
     public String getPassword() {
