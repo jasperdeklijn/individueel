@@ -1,14 +1,12 @@
-version: '2'
+version: '3.8'
 services:
-  h2:
-    container_name: 'h2'
-    hostname: 'h2'
-    image: 1000kit/h2
+  db:
+    image: mongo:latest
     ports:
-      - "8181:8181"
-      - "1521:1521"
+      - '27017:27017'
     volumes:
-      - h2-data:/opt/h2-data
+      - db:/data/db
 volumes:
-  h2-data:
-#END
+  db:
+    driver:
+      local
