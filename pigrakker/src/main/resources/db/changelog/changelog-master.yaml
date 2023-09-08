@@ -14,24 +14,24 @@ databaseChangeLog:
                        primaryKey:  true
                        nullable:  false
                 -  column:
-                     name:  username
+                     name:  firstName
                      type:  varchar(50)
                 -  column:
-                     name:  password
-                     type: varchar(255)
-                     constraints:
-                       nullable:  false
-
-  - changeSet:
-      id: 2
-      author: Jasper
-      changes:
-        - insert:
-            tableName: users
-            columns:
-              - column:
-                  name: username
-                  value: admin
-              - column:
-                  name: password
-                  value: admin
+                     name:  lastName
+                     type: varchar(50)
+                - column:
+                    name: email
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                      name: password
+                      type: varchar(255)
+                      constraints:
+                        nullable: false
+                - column:
+                    name: enabled
+                    type: boolean
+                - column:
+                    name: tokenExpired
+                    type: boolean

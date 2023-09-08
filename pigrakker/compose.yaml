@@ -1,9 +1,14 @@
+version: '2'
 services:
-  database:
-    image: 'postgres:15.2'
+  h2:
+    container_name: 'h2'
+    hostname: 'h2'
+    image: 1000kit/h2
     ports:
-      - '5432'
-    environment:
-      - 'POSTGRES_USER=admin'
-      - 'POSTGRES_DB=pigrakker'
-      - 'POSTGRES_PASSWORD=admin'
+      - "8181:8181"
+      - "1521:1521"
+    volumes:
+      - h2-data:/opt/h2-data
+volumes:
+  h2-data:
+#END
