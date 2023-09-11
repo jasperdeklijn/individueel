@@ -1,4 +1,4 @@
-package com.jasper.pigrakker;
+package com.Jasper.pigrakker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

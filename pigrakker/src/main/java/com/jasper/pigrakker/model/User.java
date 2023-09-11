@@ -1,4 +1,4 @@
-package com.jasper.pigrakker.model;
+package com.Jasper.pigrakker.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
