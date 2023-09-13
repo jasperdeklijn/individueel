@@ -1,0 +1,48 @@
+<html>
+<head>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.1/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/solid.css} "/>
+    <title>Home</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #e3f2fd;">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/"> <span th:text="${appName}">Our App</span></a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <i class="fa-solid fa-box"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-box"></i>
+                            Pakketten
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-users"></i>
+                            Ons doel
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+
+    <h1>Hello !</h1>
+    <p>Welcome to <span th:text="${appName}">Our App</span></p>
+</div>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
