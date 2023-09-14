@@ -1,10 +1,10 @@
 package com.Jasper.pigrakker.repository;
 
 import com.Jasper.pigrakker.model.User;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-@EnableMongoRepositories
+@Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-    User findByFirstName(String string);
+
 }
