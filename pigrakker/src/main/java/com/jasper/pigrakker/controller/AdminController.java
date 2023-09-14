@@ -1,4 +1,4 @@
-package com.jasper.pigrakker.controller;
+package com.Jasper.pigrakker.controller;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
     @Secured("ROLE_USER")
     @RequestMapping("/home")
     public ModelAndView adminHome() {

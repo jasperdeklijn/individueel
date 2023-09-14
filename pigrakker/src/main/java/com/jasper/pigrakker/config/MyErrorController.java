@@ -1,4 +1,4 @@
-package com.jasper.pigrakker.config;
+package com.Jasper.pigrakker.config;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
