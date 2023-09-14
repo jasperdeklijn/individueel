@@ -23,8 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user1")
-                .password(passwordEncoder().encode("user1Pass"))
+        UserDetails user1 = User.withUsername("user")
+                .password(passwordEncoder().encode("user"))
                 .roles("USER")
                 .build();
         UserDetails admin = User.withUsername("admin")

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Secured("ROLE_USER")
+    @Secured("ROLE_ADMIN")
     @RequestMapping("/home")
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView("/admin/home.html");
