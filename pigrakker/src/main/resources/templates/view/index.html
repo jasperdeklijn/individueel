@@ -37,16 +37,19 @@
                         </a>
                     </li>
                     <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-mdb-toggle="dropdown" aria-expanded="false"> <i class="fas fa-user mx-1"></i> <span sec:authentication="name">Profiel</span> </a>
+                        <button class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                           data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user mx-1"></i>
+                            <span sec:authentication="name">Profiel</span>
+                        </button>
                         <!-- Dropdown menu -->
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
                                 <a class="dropdown-item" href="#">My account</a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="#">Log out</a>
+                                <a class="dropdown-item" href="/logout">Log out</a>
                             </li>
                         </ul>
                     </li>
