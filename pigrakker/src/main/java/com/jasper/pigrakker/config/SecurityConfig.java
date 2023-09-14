@@ -22,17 +22,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.withUsername("spring")
-                .password(passwordEncoder.encode("secret"))
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails user1 = User.withUsername("user1")
+                .password(passwordEncoder().encode("user1Pass"))
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(user);
-    }
-    private AuthenticationSuccessHandler successHandler() {
-        SimpleUrlAuthenticationSuccessHandler simpleUrlAuthenticationSuccessHandler = new SimpleUrlAuthenticationSuccessHandler();
-        simpleUrlAuthenticationSuccessHandler.setDefaultTargetUrl("/");
-        return simpleUrlAuthenticationSuccessHandler;
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user1, admin);
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -46,7 +45,6 @@ public class SecurityConfig {
                         form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .successHandler(successHandler())
                                 .permitAll()
                 )
                 .logout(out ->
@@ -58,12 +56,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder encoder() {
+    public PasswordEncoder passwordEncoder() {
 
         return new BCryptPasswordEncoder();
-    }
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
     }
 
 

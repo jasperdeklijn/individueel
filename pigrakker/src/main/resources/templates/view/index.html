@@ -40,7 +40,9 @@
 <div class="container">
 
     <h1>Hello !</h1>
-    <p>Welcome to <span th:text="${appName}">Our App</span></p>
+    <p>Welcome <span th:if="${username}" th:text="${username}" ></span> to Our App</span></p>
+    <p th:if="${username}"> U heeft <span th:text="${role}"></span> rechten</p>
+
 </div>
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/5.3.1/js/bootstrap.min.js"></script>
