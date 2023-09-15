@@ -1,21 +1,33 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
+    <div th:replace="~{fragments/basicFragments :: head}"></div>
     <title>Please Log In</title>
 </head>
 <body>
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-    Invalid username and password.</div>
-<div th:if="${param.logout}">
-    You have been logged out.</div>
-<form th:action="@{/login}" method="post">
-    <div>
-        <input type="text" name="username" placeholder="Username"/>
-    </div>
-    <div>
-        <input type="password" name="password" placeholder="Password"/>
-    </div>
-    <input type="submit" value="Log in" />
-</form>
+<div th:replace="~{fragments/basicFragments :: navbar}"></div>
+<div class="container">
+
+    <form th:action="@{/login}" class="col-md-4 mx-auto" method="post">
+        <h1>Log In</h1>
+        <div th:if="${param.error}">Ongeldige gebruikersnaam en wachtwoord.</div>
+        <div th:if="${param.logout}">You have been logged out.</div>
+
+        <div class="form-group">
+            <label for="username">Gebruikersnaam:</label>
+            <input  class="form-control" type="text" name="username" placeholder="Gebruikersnaam" id="username"/>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="password">Wachtwoord:</label>
+            <input class="form-control" type="password" name="password" placeholder="Wachtwoord" id="password"/>
+        </div>
+        <br/>
+        <button class="btn btn-primary" type="submit">Log in</button><br/>
+        <a href="/user/register">Nog geen account?</a>
+    </form>
+
+</div>
+
+<div th:replace="~{fragments/basicFragments :: footer}"></div>
 </body>
 </html>

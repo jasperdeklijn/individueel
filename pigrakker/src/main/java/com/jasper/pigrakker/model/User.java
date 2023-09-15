@@ -1,4 +1,4 @@
-package com.Jasper.pigrakker.model;
+package com.jasper.pigrakker.model;
 
 import jakarta.persistence.*;
 
@@ -15,9 +15,12 @@ public class User {
 
     @Column(nullable = false)
     private String Password;
-
     @Column(nullable = false)
-    private String role;
+    private String Email;
+    @Column(nullable = true)
+    private String Phone;
+    @Column(nullable = false)
+    private String Role;
 
     public long getId() {
         return id;
@@ -43,11 +46,27 @@ public class User {
         Password = password;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+
     public String getRole() {
-        return role;
+        return Role;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        Role = role;
     }
 }

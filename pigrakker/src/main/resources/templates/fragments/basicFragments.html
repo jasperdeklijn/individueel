@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+  <div th:fragment="head">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.1/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/solid.css} "/>
+
+    <link th:href="@{/css/homestyle.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/popper.js/1.12.9/popper.min.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.js}" type="text/javascript"></script>
+  </div>
+
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="navbar">
+  <nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">Pigrakker</a>
+
+      <div class="collapse navbar-collapse spacer" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active"  href="/">
+              <i class="fa-solid fa-house"></i>
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/packets">
+              <i class="fa-solid fa-box"></i>
+              Pakketten
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/onsdoel">
+              <i class="fa-solid fa-users"></i>
+              Ons doel
+            </a>
+          </li>
+        </ul>
+        <div class="dropdown">
+          <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user mx-1"></i>
+            <span sec:authentication="name">Profiel</span>
+          </button>
+          <!-- Dropdown menu -->
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li sec:authorize="isAnonymous()">
+              <a class="dropdown-item" href="/login">Log in</a>
+            </li>
+
+            <li sec:authorize="isAuthenticated()">
+              <a class="dropdown-item" href="/user">Mijn account</a>
+            </li>
+
+            <li sec:authorize="isAuthenticated()">
+              <a class="dropdown-item" href="/logout">Log uit</a>
+            </li>
+          </ul>
+        </div>
+
+
+
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div th:fragment="footer">
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <p class="col-md-4 mb-0 text-muted">© 2023 Pigrakker, Inc</p>
+      <a class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none" href="/">Logo</a>
+      <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+      </ul>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

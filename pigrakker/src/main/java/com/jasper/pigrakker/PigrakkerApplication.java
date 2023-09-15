@@ -1,4 +1,4 @@
-package com.Jasper.pigrakker;
+package com.jasper.pigrakker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-@EnableJpaRepositories("com.Jasper.pigrakker.repository")
+@EnableJpaRepositories("com.jasper.pigrakker.repository")
 @EntityScan("com.Jasper.pigrakker.model")
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @SpringBootApplication

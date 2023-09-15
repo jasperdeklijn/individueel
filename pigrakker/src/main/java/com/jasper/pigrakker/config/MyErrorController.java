@@ -1,9 +1,8 @@
-package com.Jasper.pigrakker.config;
+package com.jasper.pigrakker.config;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +14,7 @@ public class MyErrorController implements ErrorController {
         ModelAndView modelAndView = new ModelAndView("view/error.html");
 
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-    modelAndView.addObject("status", status);
+        modelAndView.addObject("status", status);
 
         return modelAndView;
     }

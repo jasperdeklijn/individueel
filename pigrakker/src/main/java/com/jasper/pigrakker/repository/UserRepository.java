@@ -1,6 +1,6 @@
-package com.Jasper.pigrakker.repository;
+package com.jasper.pigrakker.repository;
 
-import com.Jasper.pigrakker.model.User;
+import com.jasper.pigrakker.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
