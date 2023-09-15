@@ -2,25 +2,33 @@ package com.jasper.pigrakker.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
+
 @Entity
 @Table(name="users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, unique = true)
-    private String Username;
+    private String username;
 
     @Column(nullable = false)
-    private String Password;
-    @Column(nullable = false)
-    private String Email;
+    private String password;
+    @Column(nullable = false, unique = true)
+    private String email;
     @Column(nullable = true)
-    private String Phone;
-    @Column(nullable = false)
-    private String Role;
+    private String phone;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles;
 
     public long getId() {
         return id;
@@ -31,42 +39,42 @@ public class User {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
     }
 
-    public String getRole() {
-        return Role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        Role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

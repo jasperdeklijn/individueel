@@ -2,9 +2,12 @@ package com.jasper.pigrakker.repository;
 
 import com.jasper.pigrakker.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+
+    Optional<User> findByUsernameOrEmail(String username, String email);
 
 }
