@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-@EntityScan("com.Jasper.pigrakker.*")
+@EntityScan("com.jasper.pigrakker.*")
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @SpringBootApplication
 public class PigrakkerApplication {

@@ -36,4 +36,8 @@ public class SecurityUserDetailsService implements UserDetailsService {
                 authorities
         );
     }
+    public void saveOrUpdate(User user)
+    {
+        userRepository.save(user);
+    }
 }
