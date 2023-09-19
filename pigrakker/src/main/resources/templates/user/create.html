@@ -5,16 +5,24 @@
     <title>Registreren</title>
 </head>
 <body>
+
+
 <div th:replace="~{fragments/basicFragments :: navbar}"></div>
 <div class="container">
+    <div th:if="${alertMessage}" class="alert alert-dismissible alert-info">
+        <p th:text="${alertMessage}"></p>
+    </div>
     <h1>User Registration</h1>
-    <form action="#" th:action="@{/user/register}" method="post" th:object="${user}">
-        <label>Gebruikersnaam:</label>
-        <input type="text" th:field="*{username}" /><br/>
-
-        <label>E-mail:</label>
-        <input type="email" th:field="*{email}" /><br/>
-
+    <form action="#" th:action="@{/user/register}" class="col-md-4" method="post" th:object="${user}">
+        <label class="col-3 col-form-label">Gebruikersnaam:</label>
+        <div class="input-group md-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input class="form-control" type="text" th:field="*{username}" /><br/>
+        </div>
+        <div class="input-group md-3">
+            <label>E-mail:</label>
+            <input class="form-control" type="email" th:field="*{email}" /><br/>
+        </div>
         <label>Wachtwoord:</label>
         <input type="password" th:field="*{password}" /><br/>
 

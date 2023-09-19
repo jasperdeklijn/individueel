@@ -17,9 +17,12 @@
 </head>
 <body>
 <div th:fragment="navbar">
-  <nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #e3f2fd;">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="/">Pigrakker</a>
@@ -27,7 +30,7 @@
       <div class="collapse navbar-collapse spacer" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active"  href="/">
+            <a class="nav-link active" href="/">
               <i class="fa-solid fa-house"></i>
               Home
             </a>
@@ -46,7 +49,8 @@
           </li>
         </ul>
         <div class="dropdown">
-          <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
             <i class="fas fa-user mx-1"></i>
             <span sec:authentication="name">Profiel</span>
           </button>
@@ -65,12 +69,10 @@
             </li>
           </ul>
         </div>
-
-
-
       </div>
     </div>
   </nav>
+
 </div>
 
 <div th:fragment="footer">

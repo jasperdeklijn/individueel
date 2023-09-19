@@ -7,6 +7,14 @@
 <body>
 <div th:replace="~{fragments/basicFragments :: navbar}"></div>
 
+<div class="bg-image"
+     style="
+    background-image: url{[[@{images/backgroundpork.jpg}]]};
+    height: 400px;">
+
+    <h1 class="mb-3 h2">Slogen van ons bedrijf!</h1>
+</div>
+
 <div class="container">
     <h1>Hello !</h1>
     <p>Welcome <span th:if="${username}" th:text="${username}" ></span> to Our App</span></p>

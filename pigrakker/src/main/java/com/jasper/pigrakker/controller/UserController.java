@@ -6,17 +6,27 @@ import com.jasper.pigrakker.repository.UserRepository;
 import com.jasper.pigrakker.service.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     private final SecurityUserDetailsService securityUserDetailsService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(SecurityUserDetailsService securityUserDetailsService) {
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    public UserController(SecurityUserDetailsService securityUserDetailsService, UserRepository userRepository) {
         this.securityUserDetailsService = securityUserDetailsService;
+        this.userRepository = userRepository;
     }
     @RequestMapping("/register")
     public ModelAndView register()
@@ -27,14 +37,22 @@ public class UserController {
         return modelAndView;
     }
     @PostMapping("/register")
-    public ModelAndView newUser(User user)
+    public ModelAndView newUser(@Validated User user, BindingResult bindingResult, ModelMap model)
     {
-        //encode password ?!?!?!?
-        securityUserDetailsService.saveOrUpdate(user);
-        ModelAndView modelAndView = new ModelAndView("user/create");
-        User newUser = new User();
-        modelAndView.addObject("user", newUser);
-        return modelAndView;
+        if (bindingResult.hasErrors() || !isEmailandUsernameUnique(user.getEmail() ,user.getUsername())) {
+            // Handle validation errors or duplicate email/username
+            model.addAttribute("alertMessage", "Registration failed. Please check your inputs.");
+            return new ModelAndView("user/create", model); // Assuming you have a registration page.
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        securityUserDetailsService.save(user);
+        model.addAttribute("alertMessage", "Succesvol geregistreed!");
+        return new ModelAndView("redirect:/login",model);
     }
+    private boolean isEmailandUsernameUnique(String email,String username) {
+        Optional<User> user = userRepository.findByUsernameOrEmail(email, username);
+        return  user.isPresent();
+    }
+
 
 }

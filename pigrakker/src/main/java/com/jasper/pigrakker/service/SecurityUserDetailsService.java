@@ -1,6 +1,8 @@
 package com.jasper.pigrakker.service;
 
+import com.jasper.pigrakker.model.Role;
 import com.jasper.pigrakker.model.User;
+import com.jasper.pigrakker.repository.RoleRepository;
 import com.jasper.pigrakker.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,6 +23,7 @@ import java.util.stream.Collectors;
 public class SecurityUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
@@ -36,8 +41,16 @@ public class SecurityUserDetailsService implements UserDetailsService {
                 authorities
         );
     }
-    public void saveOrUpdate(User user)
+    public void update(User user)
     {
         userRepository.save(user);
     }
+    public void save(User user)
+    {
+        Set<Role> userRoles = new HashSet<>();
+        userRoles.add(roleRepository.findByName("ROLE_USER"));
+        user.setRoles(userRoles);
+        userRepository.save(user);
+    }
+
 }
