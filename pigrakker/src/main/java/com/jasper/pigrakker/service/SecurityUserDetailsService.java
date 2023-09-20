@@ -52,5 +52,10 @@ public class SecurityUserDetailsService implements UserDetailsService {
         user.setRoles(userRoles);
         userRepository.save(user);
     }
+    public Optional<User> findById(Long id)
+    {
+        return userRepository.findById(id);
+
+    }
 
 }

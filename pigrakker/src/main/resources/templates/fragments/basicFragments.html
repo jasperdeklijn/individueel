@@ -49,19 +49,21 @@
           </li>
         </ul>
         <div class="dropdown">
-          <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown"
+          <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown" sec:authorize="isAuthenticated()"
                   aria-expanded="false">
             <i class="fas fa-user mx-1"></i>
-            <span sec:authentication="name">Profiel</span>
+            <span sec:authentication="name"></span>
           </button>
+          <a class="nav-link" type="button" sec:authorize="isAnonymous()" href="/login"
+                  aria-expanded="false">
+            <i class="fas fa-user-alt mx-1"></i>
+            <span>Log in</span>
+          </a>
           <!-- Dropdown menu -->
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li sec:authorize="isAnonymous()">
-              <a class="dropdown-item" href="/login">Log in</a>
-            </li>
 
             <li sec:authorize="isAuthenticated()">
-              <a class="dropdown-item" href="/user">Mijn account</a>
+              <a class="dropdown-item" href="/">Mijn account</a>
             </li>
 
             <li sec:authorize="isAuthenticated()">

@@ -1,5 +1,7 @@
 package com.jasper.pigrakker.config;
 
+import com.jasper.pigrakker.model.Role;
+import com.jasper.pigrakker.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,56 +9,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-public class SecurityUser implements UserDetails {
-    String ROLE_PREFIX = "ROLE_";
-
+public class SecurityUser extends User {
     String userName;
     String password;
-    String role;
+    Set<GrantedAuthority> authorities;
 
-    public SecurityUser(String username, String password, String role) {
+    public SecurityUser(String username, String password, Set<GrantedAuthority> authorities) {
         this.userName = username;
         this.password = password;
-        this.role = role;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-
-        list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role));
-
-        return list;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
+        this.authorities = authorities;
     }
 }

@@ -6,6 +6,7 @@ import com.jasper.pigrakker.repository.UserRepository;
 import com.jasper.pigrakker.service.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -50,6 +51,19 @@ public class UserController {
         securityUserDetailsService.save(user);
         model.addAttribute("alertMessage", "Succesvol geregistreed!");
         return new ModelAndView("redirect:/login",model);
+    }
+    @RequestMapping("/{userId}")
+    public ModelAndView updateUserForm(@PathVariable Long userId)
+    {
+
+        Optional<User> currentUser = securityUserDetailsService.findById(userId);
+        if(currentUser.isEmpty())
+        {
+            return new ModelAndView("redirect:/");
+        }
+        ModelAndView modelAndView = new ModelAndView("user/show");
+        modelAndView.addObject("user", currentUser);
+        return modelAndView;
 
     }
 }
