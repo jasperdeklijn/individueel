@@ -29,30 +29,27 @@ public class UserController {
         this.userRepository = userRepository;
     }
     @RequestMapping("/register")
-    public ModelAndView register()
-    {
+    public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView("user/create");
         User user = new User();
         modelAndView.addObject("user", user);
         return modelAndView;
     }
     @PostMapping("/register")
-    public ModelAndView newUser(@Validated User user, BindingResult bindingResult, ModelMap model)
-    {
-        if (bindingResult.hasErrors() || !isEmailandUsernameUnique(user.getEmail() ,user.getUsername())) {
-            // Handle validation errors or duplicate email/username
-            model.addAttribute("alertMessage", "Registration failed. Please check your inputs.");
-            return new ModelAndView("user/create", model); // Assuming you have a registration page.
+    public ModelAndView newUser(@Validated User user, BindingResult bindingResult, ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("alertMessage", "Er klopt iets niet :(");
+
+            return new ModelAndView("user/create", model);
+        }
+        if(userRepository.findByUsernameOrEmail(user.getEmail(), user.getUsername()).isPresent()) {
+            model.addAttribute("alertMessage", "Dit emailadres of gebruikersnaam bestaat al!");
+            return new ModelAndView("user/create", model);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         securityUserDetailsService.save(user);
         model.addAttribute("alertMessage", "Succesvol geregistreed!");
         return new ModelAndView("redirect:/login",model);
-    }
-    private boolean isEmailandUsernameUnique(String email,String username) {
-        Optional<User> user = userRepository.findByUsernameOrEmail(email, username);
-        return  user.isPresent();
-    }
 
-
+    }
 }

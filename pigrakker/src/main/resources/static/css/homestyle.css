@@ -5,7 +5,6 @@
 *{
     font-family: defaultFont, serif;
 }
-
 .navbar-nav .nav-item .nav-link{
     display: flex;
     flex-direction: column;

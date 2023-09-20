@@ -1,6 +1,8 @@
 package com.jasper.pigrakker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -13,11 +15,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty(message = "Gebruikersnaam mag niet leeg zijn.")
     @Column(nullable = false, unique = true)
     private String username;
-
+    @NotEmpty(message = "Wachtwoord mag niet leeg zijn.")
     @Column(nullable = false)
+    @Size(min = 10, max = 100, message = "Wachtwoord is korter dan 10 en langer dan 100")
     private String password;
+    @NotEmpty(message = "Email mag niet leeg zijn.")
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = true)

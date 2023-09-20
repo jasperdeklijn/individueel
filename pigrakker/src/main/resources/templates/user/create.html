@@ -5,36 +5,39 @@
     <title>Registreren</title>
 </head>
 <body>
-
-
 <div th:replace="~{fragments/basicFragments :: navbar}"></div>
 <div class="container">
-    <div th:if="${alertMessage}" class="alert alert-dismissible alert-info">
-        <p th:text="${alertMessage}"></p>
+    <div th:if="${alertMessage}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <h1 th:text="${alertMessage}"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <h1>User Registration</h1>
-    <form action="#" th:action="@{/user/register}" class="col-md-4" method="post" th:object="${user}">
-        <label class="col-3 col-form-label">Gebruikersnaam:</label>
-        <div class="input-group md-3">
-            <span class="input-group-text" id="basic-addon1">@</span>
-            <input class="form-control" type="text" th:field="*{username}" /><br/>
+    <form action="#" th:action="@{/user/register}" method="post" th:object="${user}">
+        <div class="col-md-5">
+            <label class="col-form-label">Gebruikersnaam:
+            <input class="form-control" type="text" th:field="*{username}" /></label>
+            <p th:if="${#fields.hasErrors('username')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{username}"></p>
         </div>
-        <div class="input-group md-3">
-            <label>E-mail:</label>
-            <input class="form-control" type="email" th:field="*{email}" /><br/>
+        <div class="col-md-5">
+            <label class="col-form-label">E-mail:
+            <input class="form-control" type="email" th:field="*{email}" /></label>
+            <p th:if="${#fields.hasErrors('email')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{email}"></p>
         </div>
-        <label>Wachtwoord:</label>
-        <input type="password" th:field="*{password}" /><br/>
 
-        <label>Telefoon nr.:</label>
-        <input type="tel" th:field="*{phone}" /><br/>
-
-
+        <div class="col-md-5">
+            <label class="col-form-label">Wachtwoord:
+            <input class="form-control" type="password" th:field="*{password}" /></label>
+            <p th:if="${#fields.hasErrors('password')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{password}"></p>
+            <div class="form-text">Wachtwoord moet minimaal 10 karakters lang zijn</div>
+        </div>
+        <div class="col-md-5">
+            <label class="col-form-label">Telefoon nr.:
+            <input class="form-control" type="tel" th:field="*{phone}" /></label>
+            <p th:if="${#fields.hasErrors('phone')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{phone}"></p>
+        </div>
         <br/>
-
-        <button type="submit">Register</button>
+        <button class="btn btn-primary" type="submit">Register</button>
     </form>
-
 </div>
 
 <div th:replace="~{fragments/basicFragments :: footer}"></div>
