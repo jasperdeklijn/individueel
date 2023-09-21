@@ -55,7 +55,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
     public Optional<User> findById(Long id)
     {
         return userRepository.findById(id);
-
     }
 
 }

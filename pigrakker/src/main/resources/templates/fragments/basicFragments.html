@@ -60,13 +60,15 @@
             <span>Log in</span>
           </a>
           <!-- Dropdown menu -->
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu" sec:authorize="isAuthenticated()" aria-labelledby="navbarDropdown">
 
-            <li sec:authorize="isAuthenticated()">
+            <li >
               <a class="dropdown-item" href="/">Mijn account</a>
             </li>
-
-            <li sec:authorize="isAuthenticated()">
+            <li>
+              <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin/users">Log uit</a>
+            </li>
+            <li>
               <a class="dropdown-item" href="/logout">Log uit</a>
             </li>
           </ul>
