@@ -21,4 +21,8 @@
     .navbar-nav .nav-link {
         font-size: 16px; /* Adjust as needed */
     }
+    .doerecht{
+        display: flex;
+        flex-direction: row;
+    }
 }

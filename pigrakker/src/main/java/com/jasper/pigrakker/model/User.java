@@ -25,7 +25,7 @@ public class User {
     @NotEmpty(message = "Email mag niet leeg zijn.")
     @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = true)
+
     private String phone;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

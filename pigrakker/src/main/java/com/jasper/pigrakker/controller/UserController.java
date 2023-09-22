@@ -6,6 +6,7 @@ import com.jasper.pigrakker.repository.UserRepository;
 import com.jasper.pigrakker.service.SecurityUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
@@ -64,6 +65,13 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("user/show");
         modelAndView.addObject("user", currentUser);
         return modelAndView;
+    }
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/users")
 
+    public ModelAndView users() {
+        ModelAndView modelAndView = new ModelAndView("/admin/users.html");
+        modelAndView.addObject("users", userRepository.findAll());
+        return modelAndView;
     }
 }

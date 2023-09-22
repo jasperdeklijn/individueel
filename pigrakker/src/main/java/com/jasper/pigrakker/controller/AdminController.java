@@ -1,4 +1,4 @@
-package com.Jasper.pigrakker.controller;
+package com.jasper.pigrakker.controller;
 
 import com.jasper.pigrakker.model.User;
 import com.jasper.pigrakker.repository.UserRepository;
@@ -21,13 +21,5 @@ public class AdminController {
     @RequestMapping("/home")
     public ModelAndView adminHome() {
         return new ModelAndView("/admin/home.html");
-    }
-    @Secured("ROLE_ADMIN")
-    @RequestMapping("/users")
-
-    public ModelAndView users() {
-        ModelAndView modelAndView = new ModelAndView("/admin/users.html");
-        modelAndView.addObject("users", userRepository.findAll());
-        return modelAndView;
     }
 }

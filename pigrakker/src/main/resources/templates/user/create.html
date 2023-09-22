@@ -7,10 +7,7 @@
 <body>
 <div th:replace="~{fragments/basicFragments :: navbar}"></div>
 <div class="container">
-    <div th:if="${alertMessage}" class="alert alert-info alert-dismissible fade show" role="alert">
-        <h1 th:text="${alertMessage}"></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+
     <h1>User Registration</h1>
     <form action="#" th:action="@{/user/register}" method="post" th:object="${user}">
         <div class="col-md-5">
