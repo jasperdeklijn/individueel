@@ -5,6 +5,7 @@
 *{
     font-family: defaultFont, serif;
 }
+
 .navbar-nav .nav-item .nav-link{
     display: flex;
     flex-direction: column;
@@ -16,6 +17,33 @@
     display: flex;
     justify-content: space-between;
 }
+/* The hero image */
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/banner.jpg");
+
+    /* Set a specific height */
+    height: 450px;
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+}
+
+
+
+
 @media (max-width: 768px) {
     /* Adjust font size for small screens */
     .navbar-nav .nav-link {
@@ -24,5 +52,8 @@
     .doerecht{
         display: flex;
         flex-direction: row;
+    }
+    .hero-image{
+        height: 250px;
     }
 }
