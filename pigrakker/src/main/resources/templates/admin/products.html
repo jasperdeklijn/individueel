@@ -23,13 +23,14 @@
         <tr th:if="${products.isEmpty()}">
             <td colspan="2"> Er bestaan nog geen Producten </td>
         </tr>
-        <tr th:each="product : ${products}"  th:data-href="${product.id}">
-            <td><span th:text="${product.id}"> ID </span></td>
-            <td><span th:text="${product.productname}"> productname </span></td>
-            <td><span th:text="${product.sold}"> sold </span></td>
-            <td><span th:text="${product.total}"> total </span></td>
-            <td><span th:text="${product.price}"> prijs </span></td>
-        </tr>
+            <tr th:each="product : ${products}"  th:href="@{/admin/product/{id}(id =${product.id})}">
+                <td><span th:text="${product.id}"> ID </span></td>
+                <td><span th:text="${product.productname}"> productname </span></td>
+                <td><span th:text="${product.sold}"> sold </span></td>
+                <td><span th:text="${product.total}"> total </span></td>
+                <td><span th:text="${product.price}"> prijs </span></td>
+            </tr>
+
         </tbody>
     </table>
     <div class="btn-group">
@@ -40,9 +41,9 @@
 </div>
 <script>
     $(document).ready(function() {
-        $("#table").click(function () {
+        $("#table tr").click(function () {
             console.log("test");
-            alert($(this).attr("href"));
+            window.location.href = $(this).attr("href");
         });
     });
 </script>

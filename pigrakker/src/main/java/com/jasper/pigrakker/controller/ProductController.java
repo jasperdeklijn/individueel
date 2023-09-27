@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -36,22 +34,50 @@ public class ProductController {
         return modelAndView;
     }
     @PostMapping("/create")
-    public ModelAndView newProduct(@Validated Product product, BindingResult bindingResult, ModelMap model) {
+    public ModelAndView newProduct(@Validated Product product, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            model.addAttribute("alertMessage", "Er klopt iets niet :(");
+            modelAndView.addObject("alertMessage", "Er klopt iets niet :(");
 
-            return new ModelAndView("admin/createProduct", model);
+            return new ModelAndView("admin/createProduct");
         }
         if(productRepository.findByProductname(product.getProductname()).isPresent()) {
-            model.addAttribute("alertMessage", "Dit product bestaat al!");
-            return new ModelAndView("admin/createProduct", model);
+            modelAndView.addObject("alertMessage", "Dit product bestaat al!");
+            return new ModelAndView("admin/createProduct");
         }
         product.setPrice(round(product.getPrice(), 2));
         product.setSold(0);
         productRepository.save(product);
-        model.addAttribute("alertMessage", "Succesvol geregistreed!");
-        return new ModelAndView("redirect:/admin/products",model);
+        modelAndView.addObject("alertMessage", "Succesvol geregistreed!");
+        return new ModelAndView("redirect:/admin/product");
     }
+
+    @GetMapping("/{productid}")
+    public ModelAndView editProduct(@PathVariable Long productid)
+    {
+        ModelAndView modelAndView = new ModelAndView("product/editProduct");
+
+        modelAndView.addObject("product", productRepository.findById(productid));
+        return modelAndView;
+    }
+    @PostMapping("/{productid}")
+    public ModelAndView editProduct(@PathVariable Long productid, @Validated Product product, BindingResult bindingResult)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            modelAndView.addObject("alertMessage", "Er klopt iets niet :(");
+            modelAndView.setViewName("admin/createProduct");
+            return modelAndView;
+        }
+        product.setPrice(round(product.getPrice(), 2));
+        product.setSold(0);
+        product.setId(productid);
+        productRepository.save(product);
+        modelAndView.addObject("product", productRepository.findById(productid));
+        modelAndView.setViewName("redirect:/admin/product");
+        return modelAndView;
+    }
+
     public static Double round(Double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
