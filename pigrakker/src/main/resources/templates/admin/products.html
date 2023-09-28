@@ -23,6 +23,7 @@
         <tr th:if="${products.isEmpty()}">
             <td colspan="2"> Er bestaan nog geen Producten </td>
         </tr>
+
             <tr th:each="product : ${products}"  th:href="@{/admin/product/{id}(id =${product.id})}">
                 <td><span th:text="${product.id}"> ID </span></td>
                 <td><span th:text="${product.productname}"> productname </span></td>

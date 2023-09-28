@@ -15,9 +15,20 @@
 </div>
 
 <div class="container">
-    <h1>Hello !</h1>
-    <p>Welcome <span th:if="${principal}" th:text="${principal}" ></span> to Our App</span></p>
-    <div style="min-height: 500px"></div>
+    <div class="card-group">
+        <div th:each="product : ${products}">
+            <div class="card" style="width: 18rem;">
+                <img th:src="@{/images/backgroundpork.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text"><span th:text="${product.productname}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${products.isEmpty()}">
+        <span> Er bestaan nog geen Producten </span>
+    </div>
+
 </div>
 
 
