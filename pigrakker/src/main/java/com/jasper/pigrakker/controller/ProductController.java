@@ -1,12 +1,10 @@
 package com.jasper.pigrakker.controller;
 
 import com.jasper.pigrakker.model.Product;
-import com.jasper.pigrakker.model.User;
 import com.jasper.pigrakker.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
