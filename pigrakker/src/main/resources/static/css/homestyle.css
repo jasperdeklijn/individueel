@@ -5,7 +5,33 @@
 *{
     font-family: defaultFont, serif;
 }
-
+body{
+    background: #E3F2FD;
+}
+.percentage_box{
+    position: relative;
+    z-index: 1;
+    min-height: 200px;
+    width: 100%;
+    display: flex;
+    transition: all .6s ease-in;
+    padding: 10px
+}
+.img_fill{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.img_fill img, .img_gray img{
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+}
+.img_gray{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .navbar-nav .nav-item .nav-link{
     display: flex;
     flex-direction: column;
