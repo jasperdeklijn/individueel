@@ -1,50 +1,28 @@
-image: maven:latest
-
+# Define the stages of your pipeline
 stages:
   - build
   - test
-  - package
   - deploy
 
+# Define global variables
+variables:
+  # Define variables here, e.g., environment variables, Maven settings, etc.
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
 
-cache:
-  paths:
-    - .m2/repository
-    - target
-
-build_job:
+# Define the jobs for each stage
+build:
   stage: build
-  tags:
-    - docker
-
   script:
-    - echo "Maven compile started"
-    - "mvn compile"
+    - echo "Building the Spring Boot application"
+    - mvn clean package -B
 
-
-test_job:
+test:
   stage: test
-  tags:
-    - docker
-
   script:
-    - echo "Maven test started"
-    - "mvn test"
+    - echo "Running tests for the Spring Boot application"
+    - mvn test -B
 
-package_job:
-  stage: package
-  tags:
-    - docker
-
-  script:
-    - echo "Maven packaging started"
-    - "mvn package"
-
-
-Deploy_job:
+deploy:
   stage: deploy
-  tags:
-    - docker
-
   script:
-    - echo "Maven deploy started"
+    - echo "Deploying the Spring Boot application"
