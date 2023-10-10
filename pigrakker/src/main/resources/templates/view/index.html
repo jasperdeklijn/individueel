@@ -25,7 +25,7 @@
                 <div class="percentage_box">
                     <img class="img_gray" th:src="@{/images/pigtemplategray.png}"/>
 
-                    <img class="img_fill" th:src="@{/images/pigtemplate.png}"/>
+                    <img class="img_fill" th:height="${100 /product.total * product.sold + '%'}" th:src="@{/images/pigtemplate.png}"/>
                 </div>
 
                 <div class="card-footer">
