@@ -2,12 +2,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="~{fragments/basicFragments :: head}"></div>
-    <title>Registreren</title>
+    <title>Productpagina</title>
 </head>
 <body>
 <div th:replace="~{fragments/basicFragments :: navbar}"></div>
 <div class="container">
-    <h1 th:text="${product.productname}"></h1>
+    <figure class="text-center">
+        <br/>
+        <a th:href="@{/}" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left"></i> Terug naar home</a>
+        <br/><br/>
+        <blockquote class="blockquote">
+            <h1 th:text="${product.productname}"></h1>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Someone famous in <cite title="Source Title">Source Title</cite>
+        </figcaption>
+    </figure>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="package-img">
+                <div class="percentage_box">
+                    <img class="img_gray" th:src="@{/images/pigtemplategray.png}"/>
+
+                    <img class="img_fill" th:height="${100 /product.total * product.sold + '%'}" th:src="@{/images/pigtemplate.png}"/>
+                </div>
+            </div>
+            <div class="packege-info">
+                <i class="fa-regular fa-user"></i>
+                <span th:text="${100 /product.total * product.sold + '%'}"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <h2 th:text="${'€'+ product.price}"></h2>
+            <div class="d-grid">
+                <a th:href="@{/}" class="btn btn-success">Plaats een bestelling</a>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 <div th:replace="~{fragments/basicFragments :: footer}"></div>

@@ -46,6 +46,8 @@ body{
     position: relative;
     display: inline-block;
     height: 400px;
+    margin: 20px;
+    width: 80%;
 }
 .img_gray{
     width: 100%;
@@ -62,9 +64,31 @@ body{
      object-position: bottom;
      transition: all .6s ease-in;
  }
-
+ .package-img{
+     display: flex;
+     margin-right: 40px;
+     border-top-left-radius: 20px;
+     border-top-right-radius: 20px;
+     background: white;
+ }
+.packege-info{
+    background: white;
+    border-top: 2px solid rgb(128, 128, 128);
+    margin-right: 40px;
+    padding: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
 @media (max-width: 768px) {
     /* Adjust font size for small screens */
+    .percentage_box{
+        height: 200px;
+        margin: 20px
+    }
+    .packege-info, .package-img{
+        margin: 0;
+    }
+
     .navbar-nav .nav-link {
         font-size: 16px; /* Adjust as needed */
     }

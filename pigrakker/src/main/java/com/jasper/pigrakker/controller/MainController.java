@@ -21,10 +21,6 @@ public class MainController {
         modelAndView.addObject("products", productRepository.findAll());
         return modelAndView;
     }
-    @GetMapping("/packets")
-    public  ModelAndView pakketen () {
-        return  new ModelAndView("view/packets");
-    }
     @GetMapping("/onsdoel")
     public  ModelAndView onsDoel () {
         return  new ModelAndView("view/onsDoel");
