@@ -24,12 +24,12 @@
                 <div class="percentage_box">
                     <img class="img_gray" th:src="@{/images/pigtemplategray.png}"/>
 
-                    <img class="img_fill" th:height="${100 /product.total * product.sold + '%'}" th:src="@{/images/pigtemplate.png}"/>
+                    <img class="img_fill" th:height="${((10000 / product.total * product.sold) / 100) + '%'}" th:src="@{/images/pigtemplate.png}"/>
                 </div>
             </div>
-            <div class="packege-info">
+            <div class="package-info">
                 <i class="fa-regular fa-user"></i>
-                <span th:text="${100 /product.total * product.sold + '%'}"></span>
+                <span th:text="${(10000 / product.total * product.sold) / 100  + '%'}"></span>
             </div>
         </div>
         <div class="col-md-6">
