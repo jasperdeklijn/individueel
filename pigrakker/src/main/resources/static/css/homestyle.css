@@ -45,8 +45,8 @@ body{
 .percentage_box{
     position: relative;
     display: inline-block;
+    object-position: center;
     height: 400px;
-    margin: 20px;
     width: 80%;
 }
 .img_gray{
@@ -82,10 +82,10 @@ body{
 @media (max-width: 768px) {
     /* Adjust font size for small screens */
     .percentage_box{
-        height: 200px;
+        height: 300px;
         margin: 20px
     }
-    .packege-info, .package-img{
+    .package-info, .package-img{
         margin: 0;
     }
 
