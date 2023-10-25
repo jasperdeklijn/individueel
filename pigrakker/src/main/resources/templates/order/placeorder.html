@@ -11,14 +11,12 @@
         <blockquote class="blockquote">
             <h1 th:text="${product.productname}"></h1>
         </blockquote>
-
     </figure>
     <div class="row">
-
         <div class="col-md-6">
-            <h2>Confirm Order</h2>
+            <h2>Bevestig Bestelling</h2>
             <form action="#" th:action="@{/order/submit}" th:object="${orderItem}" method="post">
-                <table class="table ">
+                <table class="table">
                     <thead class="table-light">
                         <tr>
                             <th>Product</th>
@@ -29,12 +27,14 @@
                      <tbody>
                          <tr>
                              <td th:text="${product.productname}">Product Name</td>
-                             <td><input min="1" type="number" id="quantity" class="input-group" value="1"/> </td>
+                             <td>
+                                 <input min="1" th:max="${product.total - product.sold}" type="number" id="quantity" class="input-group" value="1"/>
+                             </td>
                              <td th:text="${product.price}" th:data-price="${product.price}" id="price">price</td>
                          </tr>
                      </tbody>
                 </table>
-                <button class="btn btn-primary" type="submit">Bestel!</button>
+                <button class="btn btn-primary" type="submit">Bestel mar!</button>
             </form>
 
         </div>

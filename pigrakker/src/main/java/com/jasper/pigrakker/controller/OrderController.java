@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +28,7 @@ public class OrderController {
 
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping("/place/{productid}")
-    public ModelAndView orderPlace(@PathVariable Long productid) {
+    public ModelAndView orderComfirm(@PathVariable Long productid) {
         ModelAndView modelAndView = new ModelAndView("order/placeorder");
         Order order = new Order();
         OrderItem orderItem = new OrderItem();
@@ -35,4 +37,18 @@ public class OrderController {
         modelAndView.addObject("product", productRepository.findById(productid).get());
         return modelAndView;
     }
+
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @PostMapping("/place/{productid}")
+    public ModelAndView orderPlace(OrderItem orderItem, Order order, @PathVariable Long productid) {
+        ModelAndView modelAndView = new ModelAndView("order/placeorder");
+        order = new Order();
+        orderItem = new OrderItem();
+        orderItem.setOrder(order);
+        modelAndView.addObject("orderItem", orderItem);
+        modelAndView.addObject("product", productRepository.findById(productid).get());
+        return modelAndView;
+    }
+
+
 }
