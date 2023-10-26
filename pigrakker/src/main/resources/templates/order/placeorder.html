@@ -28,7 +28,7 @@
                          <tr>
                              <td th:text="${product.productname}">Product Name</td>
                              <td>
-                                 <input min="1" th:max="${product.total - product.sold}" type="number" id="quantity" class="input-group" value="1"/>
+                                 <input min="1" th:max="${product.total - product.sold}" type="number" id="quantity" class="form-control" value="1"/>
                              </td>
                              <td th:text="${product.price}" th:data-price="${product.price}" id="price">price</td>
                          </tr>
