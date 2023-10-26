@@ -11,10 +11,6 @@ stages:
   - test
   - deploy
 
-# Define global variables
-variables:
-  # Define variables here, e.g., environment variables, Maven settings, etc.
-  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
 
 # Define the jobs for each stage
 build:
