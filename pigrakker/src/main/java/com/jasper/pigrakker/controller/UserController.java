@@ -4,6 +4,7 @@ import com.jasper.pigrakker.model.User;
 import com.jasper.pigrakker.repository.RoleRepository;
 import com.jasper.pigrakker.repository.UserRepository;
 import com.jasper.pigrakker.service.SecurityUserDetailsService;
+import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
@@ -39,20 +40,27 @@ public class UserController {
         return modelAndView;
     }
     @PostMapping("/register")
-    public ModelAndView newUser(@Validated User user, BindingResult bindingResult) {
+    public ModelAndView newUser(@Validated User user, BindingResult bindingResult) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
+        if(userRepository.findByUsername(user.getUsername()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent()) {
+            modelAndView.addObject("alertMessage", "Dit emailadres of gebruikersnaam bestaat al!");
+            modelAndView.setViewName("user/create");
+            return modelAndView;
+        }
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("alertMessage","Er klopt iets niet :(");
             modelAndView.setViewName("user/create");
             return modelAndView;
         }
-        if(userRepository.findByUsernameOrEmail(user.getEmail(), user.getUsername()).isPresent()) {
-            modelAndView.addObject("alertMessage", "Dit emailadres of gebruikersnaam bestaat al!");
-            modelAndView.setViewName("user/create");
-            return modelAndView;
-        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        securityUserDetailsService.save(user);
+        try {
+            securityUserDetailsService.save(user);
+        }catch (Exception e)
+        {
+            throw new Exception(e.getMessage());
+        }
+
         modelAndView.addObject("alertMessage", "Succesvol geregistreed!");
         modelAndView.setViewName("redirect:/login");
         return modelAndView;

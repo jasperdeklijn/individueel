@@ -5,7 +5,6 @@ import com.jasper.pigrakker.model.User;
 import com.jasper.pigrakker.repository.RoleRepository;
 import com.jasper.pigrakker.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,12 +45,17 @@ public class SecurityUserDetailsService implements UserDetailsService {
     {
         userRepository.save(user);
     }
-    public void save(User user)
+    public IntPredicate save(User user)
     {
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(roleRepository.findByName("ROLE_USER"));
         user.setRoles(userRoles);
+        if(userRepository.findByUsername(user.getUsername()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent())
+        {
+            throw new UsernameNotFoundException("Username or email is already taken.");
+        }
         userRepository.save(user);
+        return null;
     }
     public Optional<User> findById(Long id)
     {
