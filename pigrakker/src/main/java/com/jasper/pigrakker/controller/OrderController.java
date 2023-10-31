@@ -26,7 +26,6 @@ public class OrderController {
     @Autowired
     ProductRepository productRepository;
 
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping("/place/{productid}")
     public ModelAndView orderComfirm(@PathVariable Long productid) {
         ModelAndView modelAndView = new ModelAndView("order/placeorder");
@@ -38,7 +37,6 @@ public class OrderController {
         return modelAndView;
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @PostMapping("/place/{productid}")
     public ModelAndView orderPlace(OrderItem orderItem, Order order, @PathVariable Long productid) {
         ModelAndView modelAndView = new ModelAndView("order/placeorder");

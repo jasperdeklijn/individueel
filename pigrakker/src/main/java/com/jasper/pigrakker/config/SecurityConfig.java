@@ -13,11 +13,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
+import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements WebMvcConfigurer {
@@ -34,15 +33,18 @@ public class SecurityConfig implements WebMvcConfigurer {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/order/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/")
-                                .permitAll()
-                )
+                .oauth2Login(withDefaults())
+//                .formLogin(form ->
+//                        form
+//                                .loginPage("/login")
+//                                .loginProcessingUrl("/login")
+//                                .defaultSuccessUrl("/")
+//                                .permitAll()
+//                )
+                .formLogin(withDefaults())
                 .logout(out ->
                         out.logoutRequestMatcher(new
                                         AntPathRequestMatcher("/logout"))
