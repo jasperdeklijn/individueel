@@ -2,14 +2,15 @@ package com.jasper.pigrakker.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 
+import java.security.Principal;
 import java.util.Set;
 
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +18,8 @@ public class User {
 
     @NotEmpty(message = "Gebruikersnaam mag niet leeg zijn.")
     @Column(nullable = false, unique = true)
-    private String username;
-    @NotEmpty(message = "Wachtwoord mag niet leeg zijn.")
-    @Column(nullable = false)
-    @Size(min = 10, max = 100, message = "Wachtwoord is korter dan 10 en langer dan 100")
-    private String password;
+    private String name;
+
     @NotEmpty(message = "Email mag niet leeg zijn.")
     @Column(nullable = false, unique = true)
     private String email;
@@ -43,20 +41,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

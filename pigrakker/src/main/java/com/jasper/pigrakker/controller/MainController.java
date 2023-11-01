@@ -16,9 +16,11 @@ public class MainController {
     private ProductRepository productRepository;
 
     @GetMapping("/")
-    public ModelAndView homePage() {
+    public ModelAndView homePage(Principal principal) {
+
         ModelAndView modelAndView = new ModelAndView("view/index");
         modelAndView.addObject("products", productRepository.findAll());
+        modelAndView.addObject("Principal", principal);
         return modelAndView;
     }
     @GetMapping("/onsdoel")

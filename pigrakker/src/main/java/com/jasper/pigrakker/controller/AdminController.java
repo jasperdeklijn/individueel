@@ -14,8 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
-    UserRepository userRepository;
 
     @Secured("ROLE_ADMIN")
     @RequestMapping("/home")

@@ -30,21 +30,19 @@ public class SecurityConfig implements WebMvcConfigurer {
         return http
 
                 .csrf(AbstractHttpConfigurer::disable)
-
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/order/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(withDefaults())
-//                .formLogin(form ->
-//                        form
-//                                .loginPage("/login")
-//                                .loginProcessingUrl("/login")
-//                                .defaultSuccessUrl("/")
-//                                .permitAll()
-//                )
-                .formLogin(withDefaults())
+                .formLogin(form ->
+                        form
+                                .loginPage("/login")
+                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/")
+                                .permitAll()
+                )
                 .logout(out ->
                         out.logoutRequestMatcher(new
                                         AntPathRequestMatcher("/logout"))
@@ -52,18 +50,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 )
                 .build();
     }
-    @Bean
-    public RoleHierarchy roleHierarchy() {
-        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        String hierarchy = "ROLE_ADMIN > ROLE_USER";
-        roleHierarchy.setHierarchy(hierarchy);
-        return roleHierarchy;
-    }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
 
 
 }
