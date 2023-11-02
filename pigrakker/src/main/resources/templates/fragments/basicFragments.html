@@ -58,7 +58,7 @@
           <ul class="dropdown-menu" sec:authorize="isAuthenticated()" aria-labelledby="navbarDropdown">
 
             <li>
-              <a class="dropdown-item" href="/user/me">Mijn account</a>
+              <a class="dropdown-item" sec:authorize="hasRole('ROLE_USER')" href="/user/me">Mijn account</a>
             </li>
             <li>
               <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="/admin/users">Gebruikers</a>
