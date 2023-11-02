@@ -1,6 +1,7 @@
 
 package com.jasper.pigrakker.config;
 
+import com.jasper.pigrakker.service.OAuth2Service;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements WebMvcConfigurer {
+    @Bean
+    public OAuth2Service customOAuth2UserService() {
+        return new OAuth2Service();
+    }
 
     private GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
         return (authorities) -> {
@@ -58,6 +63,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/order/**").authenticated()
                         .anyRequest().permitAll()
                 )
+                .userDetailsService(customOAuth2UserService())
                 .oauth2Client(withDefaults())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .userInfoEndpoint((userInfo) -> userInfo
