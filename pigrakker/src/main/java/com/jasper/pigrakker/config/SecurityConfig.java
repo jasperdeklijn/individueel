@@ -1,7 +1,6 @@
 
 package com.jasper.pigrakker.config;
 
-import com.jasper.pigrakker.service.OAuth2Service;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,32 +15,48 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements WebMvcConfigurer {
-    @Bean
-    public OAuth2Service customOAuth2UserService() {
-        return new OAuth2Service();
-    }
 
     private GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
         return (authorities) -> {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+            boolean isAdmin = authorities.stream()
+                    .anyMatch(authority -> {
+                        if (authority instanceof OAuth2UserAuthority) {
+                            Map<String, Object> attributes = ((OAuth2UserAuthority) authority).getAttributes();
+                            String email = (String) attributes.get("email");
+                            return email != null && email.matches("jasperdeklijn@gmail.com"); // Check the email domain
+                        } else if (authority instanceof OidcUserAuthority) {
+                            Map<String, Object> claims = ((OidcUserAuthority) authority).getIdToken().getClaims();
+                            String email = (String) claims.get("email");
+                            return email != null && email.endsWith("jasperdeklijn@gmail.com"); // Check the email domain
+                        }
+                        return false;
+                    });
 
             authorities.forEach((authority) -> {
                 GrantedAuthority mappedAuthority;
 
                 if (authority instanceof OidcUserAuthority) {
                     OidcUserAuthority userAuthority = (OidcUserAuthority) authority;
-                    mappedAuthority = new OidcUserAuthority(
-                            "ROLE_ADMIN", userAuthority.getIdToken(), userAuthority.getUserInfo());
+                    if (isAdmin) {
+                        mappedAuthority = new OidcUserAuthority("ROLE_ADMIN", userAuthority.getIdToken(), userAuthority.getUserInfo());
+                    } else {
+                        mappedAuthority = new OidcUserAuthority("ROLE_USER", userAuthority.getIdToken(), userAuthority.getUserInfo());
+                    }
                 } else if (authority instanceof OAuth2UserAuthority) {
                     OAuth2UserAuthority userAuthority = (OAuth2UserAuthority) authority;
-                    mappedAuthority = new OAuth2UserAuthority(
-                            "ROLE_ADMIN", userAuthority.getAttributes());
+                    if (isAdmin) {
+                        mappedAuthority = new OAuth2UserAuthority("ROLE_ADMIN", userAuthority.getAttributes());
+                    } else {
+                        mappedAuthority = new OAuth2UserAuthority("ROLE_USER", userAuthority.getAttributes());
+                    }
                 } else {
                     mappedAuthority = authority;
                 }
@@ -52,7 +67,6 @@ public class SecurityConfig implements WebMvcConfigurer {
             return mappedAuthorities;
         };
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -63,7 +77,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/order/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .userDetailsService(customOAuth2UserService())
                 .oauth2Client(withDefaults())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .userInfoEndpoint((userInfo) -> userInfo

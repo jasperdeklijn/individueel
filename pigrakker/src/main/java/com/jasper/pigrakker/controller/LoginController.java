@@ -9,6 +9,6 @@ public class LoginController {
     @GetMapping("/login")
     public ModelAndView loginForm()
     {
-        return new ModelAndView("/login.html");
+        return new ModelAndView("/login");
     }
 }
