@@ -5,15 +5,30 @@ stages:
 
 build:
   stage: build
+  image: openjdk
   script:
-    - mvn clean package
-
+    - echo "Building the pipeline"
+    - cd pigrakker
+    - mvn install -B
+  artifacts:
+    paths:
+      - target
 test:
   stage: test
+  image: maven:latest
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/pigrakker/TEST_*.xml
   script:
-    - mvn test
+    - echo "testing"
+    - cd pigrakker
+    - mvn verify
+  tags:
+    -ugrad
 
 deploy:
   stage: deploy
   script:
-    - deploy_to_server.sh
+    - echo "doesn't do anything"
