@@ -1,8 +1,6 @@
 stages:
   - build
   - test
-  - deploy
-
 build:
   stage: build
   image: openjdk
@@ -27,8 +25,3 @@ test:
     - mvn verify
   tags:
     - ugrad
-
-deploy:
-  stage: deploy
-  script:
-    - echo "doesn't do anything"
