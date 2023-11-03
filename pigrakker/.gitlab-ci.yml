@@ -1,28 +1,19 @@
-# Define the stages of your pipeline
 stages:
   - build
   - test
   - deploy
 
-# Define global variables
-variables:
-  # Define variables here, e.g., environment variables, Maven settings, etc.
-  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-
-# Define the jobs for each stage
 build:
   stage: build
   script:
-    - echo "Building the Spring Boot application"
-    - mvn clean package -B
+    - mvn clean package
 
 test:
   stage: test
   script:
-    - echo "Running tests for the Spring Boot application"
-    - mvn test -B
+    - mvn test
 
 deploy:
   stage: deploy
   script:
-    - echo "Deploying the Spring Boot application"
+    - deploy_to_server.sh
