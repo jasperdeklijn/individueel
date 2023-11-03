@@ -1,20 +1,34 @@
-image: docker:latest
-services:
-  - docker:dind
-
-variables:
-  DOCKER_DRIVER: overlay
-  SPRING_PROFILES_ACTIVE: gitlab-ci
-
 stages:
   - build
-  - package
+  - test
   - deploy
 
-maven-build:
-  image: maven:3-jdk-8
+build:
   stage: build
-  script: "mvn package -B"
+  image: openjdk
+  script:
+    - echo "Building the pipeline"
+    - cd pigrakker
+    - mvn install -B
   artifacts:
     paths:
-      - target/*.jar
+      - target
+test:
+  stage: test
+  image: maven:latest
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/pigrakker/TEST_*.xml
+  script:
+    - echo "testing"
+    - cd pigrakker
+    - mvn verify
+  tags:
+    - ugrad
+
+deploy:
+  stage: deploy
+  script:
+    - echo "doesn't do anything"
