@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - devBranch
+      - main
 jobs:
   build-test:
     name: build-test job
