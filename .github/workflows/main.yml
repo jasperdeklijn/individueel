@@ -1,0 +1,28 @@
+name: Build & test App
+
+on:
+  push:
+    branches:
+      - devBranch
+jobs:
+  build-test:
+    name: build-test job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'openjdk'
+          java-version: 20
+
+      - name: Unit Tests
+        run: mvn -B test --file pom.xml
+
+      - name: Build Application
+        run: |
+          mvn clean
+          mvn -B package --file pom.xml
+          
