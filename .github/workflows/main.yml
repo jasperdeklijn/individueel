@@ -20,10 +20,10 @@ jobs:
           java-version: 20
 
       - name: Unit Tests
-        run: mvn -B test --file pigrakker/pom.xml
+        run: mvn -B test --file pom.xml
 
       - name: Build Application
         run: |
           mvn clean
-          mvn -B package --file pigrakker/pom.xml
+          mvn -B package --file pom.xml
           
