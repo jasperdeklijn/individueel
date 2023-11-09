@@ -1,6 +1,7 @@
 
 package com.jasper.pigrakker.config;
 
+import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,10 +33,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                             Map<String, Object> attributes = ((OAuth2UserAuthority) authority).getAttributes();
                             String email = (String) attributes.get("email");
                             return email != null && email.matches("jasperdeklijn@gmail.com"); // Check the email domain
-                        } else if (authority instanceof OidcUserAuthority) {
-                            Map<String, Object> claims = ((OidcUserAuthority) authority).getIdToken().getClaims();
-                            String email = (String) claims.get("email");
-                            return email != null && email.endsWith("jasperdeklijn@gmail.com"); // Check the email domain
                         }
                         return false;
                     });
@@ -65,6 +62,10 @@ public class SecurityConfig implements WebMvcConfigurer {
 
             return mappedAuthorities;
         };
+    }
+    @Bean
+    public PrincipalExtractor googlePrincipalExtractor() {
+        return new GooglePrincipalExtractor();
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
