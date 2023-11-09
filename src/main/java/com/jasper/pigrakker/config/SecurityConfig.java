@@ -39,7 +39,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                         }
                         return false;
                     });
-
             authorities.forEach((authority) -> {
                 GrantedAuthority mappedAuthority;
 
