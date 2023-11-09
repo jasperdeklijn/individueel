@@ -18,6 +18,8 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: 20
+      - name: Start the database container
+        run: docker-compose up -d
 
       - name: Unit Tests
         run: mvn -B test --file pom.xml
