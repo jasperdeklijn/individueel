@@ -82,12 +82,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                                 .userAuthoritiesMapper(grantedAuthoritiesMapper())
                         )
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/login")
-                                .defaultSuccessUrl("/")
-                                .permitAll()
-                )
+                .formLogin(withDefaults())
                 .logout(out ->
                         out.logoutRequestMatcher(new
                                         AntPathRequestMatcher("/logout"))
