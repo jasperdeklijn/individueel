@@ -1,4 +1,4 @@
-package com.jasper.pigrakker.enums;
+package com.jasper.pigrakker.model;
 
 public enum Status {
     NEEDSPAYREQUEST,

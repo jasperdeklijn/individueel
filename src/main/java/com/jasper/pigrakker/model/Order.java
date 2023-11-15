@@ -1,6 +1,6 @@
 package com.jasper.pigrakker.model;
 
-import com.jasper.pigrakker.enums.Status;
+import com.jasper.pigrakker.model.Status;
 import jakarta.persistence.*;
 
 import java.util.Date;
