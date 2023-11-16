@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 
-@Controller
+@RestController
 public class ProductController {
 
     @Autowired
@@ -78,7 +79,10 @@ public class ProductController {
         return modelAndView;
     }
 
-
+    @GetMapping("/products")
+    public List<Product> getProducts() {
+        return productRepository.findAll();
+    }
     @GetMapping("/product/{productid}")
     public ModelAndView showProduct(@PathVariable Long productid)
     {
