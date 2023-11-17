@@ -47,7 +47,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown" sec:authorize="isAuthenticated()"
                   aria-expanded="false">
             <i class="fas fa-user mx-1"></i>
-            <span sec:authentication="name"></span>
+            <span sec:authentication="principal"></span>
           </button>
           <a class="nav-link" type="button" sec:authorize="isAnonymous()" href="/login"
                   aria-expanded="false">

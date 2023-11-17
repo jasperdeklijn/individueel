@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <div th:replace="~{fragments/basicFragments :: head}"></div>
     <title>Home</title>
@@ -15,7 +15,8 @@
 </div>
 
 <div class="container">
-    <span th:text="${Principal}"></span>
+    <span sec:authorize="isAuthenticated()" th:text="${principal}"></span>
+    <span sec:authentication="principal"></span>
     <div class="row">
         <div th:each="product : ${products}" class="col-sm-6">
 

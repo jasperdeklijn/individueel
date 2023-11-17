@@ -1,7 +1,7 @@
 
 package com.jasper.pigrakker.config;
 
-import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
+import com.jasper.pigrakker.service.CustomOidcUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,7 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -64,8 +68,9 @@ public class SecurityConfig implements WebMvcConfigurer {
         };
     }
     @Bean
-    public PrincipalExtractor googlePrincipalExtractor() {
-        return new GooglePrincipalExtractor();
+    public OidcUserService getService()
+    {
+        return new CustomOidcUserService();
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -81,6 +86,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .userInfoEndpoint((userInfo) -> userInfo
                                 .userAuthoritiesMapper(grantedAuthoritiesMapper())
+                                .oidcUserService(getService())
                         )
                 )
                 .formLogin(withDefaults())

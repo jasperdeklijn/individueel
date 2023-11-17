@@ -2,6 +2,8 @@ package com.jasper.pigrakker.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.security.Principal;
 import java.util.Set;
@@ -9,8 +11,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
 
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,26 +26,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    private String phone;
+    @Column
+    private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-    )
-    private Set<Role> roles;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -57,19 +42,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
