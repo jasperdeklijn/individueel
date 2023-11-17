@@ -6,12 +6,14 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private String provider;
-    private String accessToken;
+    private String Name;
+    private String Email;
+    private String imageUrl;
 
-    public CustomUserDetails(String provider, String accessToken) {
-        this.provider = provider;
-        this.accessToken = accessToken;
+    public CustomUserDetails(String name, String email, String imageUrl) {
+        Name = name;
+        Email = email;
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         // Implement logic to retrieve the username from the provider
-        return null;
+        return this.Name;
     }
 
     @Override

@@ -72,6 +72,8 @@ public class SecurityConfig implements WebMvcConfigurer {
     {
         return new CustomOidcUserService();
     }
+
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
