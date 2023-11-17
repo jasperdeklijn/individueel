@@ -14,7 +14,7 @@ public class OrderItem {
     private Product product;
     @OneToOne
     private Order order;
-    @NotEmpty(message = "hoeveelheid mag niet leeg zijn.")
+    @NotEmpty(message = "Hoeveelheid mag niet leeg zijn.")
     private int quantity;
 
     public long getId() {

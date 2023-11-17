@@ -16,6 +16,7 @@
 
 <div class="container">
     <span sec:authorize="isAuthenticated()" th:text="${principal}"></span>
+    <span>------------------</span>
     <span sec:authentication="principal"></span>
     <div class="row">
         <div th:each="product : ${products}" class="col-sm-6">
