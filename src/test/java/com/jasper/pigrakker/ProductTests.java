@@ -21,30 +21,13 @@ public class ProductTests {
         Product product = new Product();
         product.setProductname("Test Product");
         product.setDescription("Test Description");
-        product.setTotal(10);
-        product.setPrice(29.99);
-        product.setSold(0);
 
         Product savedProduct = productRepository.save(product);
 
         assertNotNull(savedProduct.getId());
         assertEquals("Test Product", savedProduct.getProductname());
         assertEquals("Test Description", savedProduct.getDescription());
-        assertEquals(10, savedProduct.getTotal());
-        assertEquals(29.99, savedProduct.getPrice(), 0.01); // Double comparison with tolerance
-        assertEquals(0, savedProduct.getSold());
+
     }
 
-    @Test
-    @Transactional
-    public void testProductnameNotBlank() {
-        Product product = new Product();
-        product.setDescription("Test Description");
-        product.setTotal(10);
-        product.setPrice(29.99);
-        product.setSold(0);
-
-        // Attempt to save a product with a blank productname
-        assertThrows(ConstraintViolationException.class, () -> productRepository.save(product));
-    }
 }

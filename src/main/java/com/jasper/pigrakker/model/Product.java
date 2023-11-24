@@ -1,5 +1,4 @@
 package com.jasper.pigrakker.model;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -17,11 +16,7 @@ public class Product {
     @Lob
     private String description;
 
-    private int total;
-
-    private Double price;
-    @Column()
-    private int sold;
+    private int totalKG;
 
     public long getId() {
         return id;
@@ -47,27 +42,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getTotal() {
-        return total;
+    public int getTotalKG() {
+        return totalKG;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getSold() {
-        return sold;
-    }
-
-    public void setSold(int sold) {
-        this.sold = sold;
+    public void setTotalKG(int totalKG) {
+        this.totalKG = totalKG;
     }
 }
