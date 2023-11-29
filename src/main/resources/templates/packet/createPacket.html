@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments/basicFragments :: head}"></div>
+    <title>Registreren</title>
+</head>
+<body>
+<div th:replace="~{fragments/basicFragments :: navbar}"></div>
+<div class="container">
+
+    <h1>Packet aanmaken</h1>
+    <form action="#" th:action="@{/admin/packet/create}" method="post" th:object="${packet}">
+        <div class="col-md-5">
+            <label class="col-form-label">Pakketnaam:
+            <input class="form-control" type="text" th:field="*{packetname}" /></label>
+            <p th:if="${#fields.hasErrors('packetname')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{packetname}"></p>
+        </div>
+        <div class="col-md-5">
+            <label class="col-form-label">Inhoud:
+            <textarea class="form-control"  th:field="*{contains}"></textarea></label>
+            <p th:if="${#fields.hasErrors('contains')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{contains}"></p>
+        </div>
+
+        <div class="col-md-5">
+            <label class="col-form-label">Prijs:
+            <input class="form-control" type="number" th:field="*{price}" /></label>
+            <p th:if="${#fields.hasErrors('price')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{price}"></p>
+        </div>
+        <div class="col-md-5">
+        <label class="col-form-label">Totaal in KG:
+            <input class="form-control" type="number" th:field="*{totalKG}" /></label>
+        <p th:if="${#fields.hasErrors('totalKG')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{totalKG}"></p>
+        </div>
+        <br/>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+</div>
+
+<div th:replace="~{fragments/basicFragments :: footer}"></div>
+</body>
+</html>

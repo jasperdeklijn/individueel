@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div th:replace="~{fragments/basicFragments :: head}"></div>
+    <meta charset="UTF-8">
+    <title>AdminPortal</title>
+</head>
+<body>
+<div th:replace="~{fragments/basicFragments :: navbar}"></div>
+<div th:replace="~{fragments/basicFragments :: customTableUrl}"></div>
+<div class="container">
+    <h1>Alle producten</h1>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Pakkets naam </th>
+            <th> Inhoud </th>
+            <th> Prijs </th>
+            <th> Totaal KG</th>
+            <th> Verkocht </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${packets.isEmpty()}">
+            <td colspan="5"> Er bestaan nog geen Pakketten </td>
+        </tr>
+        <tr th:each="packet : ${packets}"  th:attr="url=@{/admin/packet/{id}(id =${packet.id})}" id="row"  onclick="navigateToUrl(this)">
+            <td><span th:text="${packet.id}"> ID </span></td>
+            <td><span th:text="${packet.packetname}"> productname </span></td>
+            <td><span th:text="${packet.contains}"> Inhoud </span></td>
+            <td><span th:text="${packet.price}"> Prijs </span></td>
+            <td><span th:text="${packet.totalKG}"> TotalKG </span></td>
+            <td><span th:text="${packet.sold}"> Verkocht </span></td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <a class="btn btn-primary" href="/admin/packet/create">
+            Nieuw Pakket
+        </a>
+    </div>
+</div>
+
+<div th:replace="~{fragments/basicFragments :: footer}"></div>
+</body>
+</html>

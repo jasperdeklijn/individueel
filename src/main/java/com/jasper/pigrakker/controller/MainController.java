@@ -1,5 +1,6 @@
 package com.jasper.pigrakker.controller;
 
+import com.jasper.pigrakker.repository.PacketRepository;
 import com.jasper.pigrakker.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,11 +17,14 @@ public class MainController {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private PacketRepository packetRepository;
 
     @GetMapping("/")
     public ModelAndView homePage() {
         ModelAndView modelAndView = new ModelAndView("view/index");
         modelAndView.addObject("products", productRepository.findAll());
+        modelAndView.addObject("packets", packetRepository.findAll());
         return modelAndView;
     }
     @GetMapping("/onsdoel")

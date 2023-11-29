@@ -19,10 +19,21 @@ public class Packet {
 
     @Column(nullable = false)
     private Double price;
+
+    @Column(nullable = false)
+    private int totalKG;
     private int sold;
 
     public long getId() {
         return id;
+    }
+
+    public int getTotalKG() {
+        return totalKG;
+    }
+
+    public void setTotalKG(int totalKG) {
+        this.totalKG = totalKG;
     }
 
     public void setId(long id) {
