@@ -37,7 +37,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         if (authority instanceof OAuth2UserAuthority) {
                             Map<String, Object> attributes = ((OAuth2UserAuthority) authority).getAttributes();
                             String email = (String) attributes.get("email");
-                            return email != null && email.matches("jasperdeklijn@gmail.com"); // Check the email domain
+                            return email != null && email.matches("jasperdeklijn@gmail.com");
                         }
                         return false;
                     });

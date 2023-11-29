@@ -46,7 +46,7 @@
         <div class="dropdown">
           <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown" sec:authorize="isAuthenticated()"
                   aria-expanded="false">
-            <img th:if="${#authentication.principal.picture}" th:src="${#authentication.principal.picture}">
+            <img class="rounded-circle shadow-4-strong" th:if="${#authentication.principal.picture}" th:src="${#authentication.principal.picture}"/>
             <span sec:authentication="principal.email"></span>
           </button>
           <a class="nav-link" type="button" sec:authorize="isAnonymous()" href="/login"
