@@ -21,23 +21,17 @@
             <p th:if="${#fields.hasErrors('description')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{description}"></p>
         </div>
 
-
         <div class="col-md-5">
-            <label class="col-form-label">Prijs:
-                <div class="input-group">
-                    <span class="input-group-text">€</span>
-                    <input class="form-control" type="text" th:field="*{price}" />
-                </div>
-            </label>
-            <p th:if="${#fields.hasErrors('price')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{price}"></p>
-        </div>
-
-        <div class="col-md-5">
-            <label class="col-form-label">Totaal aantal:
-                <input class="form-control" type="number" th:field="*{total}" /></label>
-            <p th:if="${#fields.hasErrors('total')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{total}"></p>
+            <label class="col-form-label">Totaal aantal KG:
+                <input class="form-control" type="number" th:field="*{totalKG}" /></label>
+            <p th:if="${#fields.hasErrors('totalKG')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{totalKG}"></p>
         </div>
         <br/>
+        <div class="col-md-5">
+            <label class="col-form-label">Totaal aantal verkocht:
+                <input class="form-control" type="number" th:field="*{sold}" disabled></label>
+            <p th:if="${#fields.hasErrors('totalKG')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{sold}"></p>
+        </div>
         <button class="btn btn-primary" type="submit">Opslaan</button>
     </form>
 </div>

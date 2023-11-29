@@ -90,7 +90,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                                 .oidcUserService(getService())
                         )
                 )
-                .formLogin(withDefaults())
                 .logout(out ->
                         out.logoutRequestMatcher(new
                                         AntPathRequestMatcher("/logout"))

@@ -16,7 +16,11 @@ public class Product {
     @Lob
     private String description;
 
+    @Column(nullable = false)
     private int totalKG;
+
+    private int sold;
+
 
     public long getId() {
         return id;
@@ -48,5 +52,13 @@ public class Product {
 
     public void setTotalKG(int totalKG) {
         this.totalKG = totalKG;
+    }
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 }

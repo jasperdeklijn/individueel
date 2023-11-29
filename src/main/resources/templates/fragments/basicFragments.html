@@ -47,8 +47,6 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" type="button" data-bs-toggle="dropdown" sec:authorize="isAuthenticated()"
                   aria-expanded="false">
             <img th:if="${#authentication.principal.picture}" th:src="${#authentication.principal.picture}">
-
-            <i th:accept="${#authentication.principal.picture}" class="fas fa-user mx-1"></i>
             <span sec:authentication="principal.email"></span>
           </button>
           <a class="nav-link" type="button" sec:authorize="isAnonymous()" href="/login"
@@ -96,6 +94,15 @@
       </ul>
     </footer>
   </div>
+</div>
+
+<div th:fragment="customTableUrl">
+  <script>
+    function navigateToUrl(element) {
+      window.location.href = element.getAttribute('url');
+    }
+  </script>
+
 </div>
 
 </body>

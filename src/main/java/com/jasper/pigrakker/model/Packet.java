@@ -9,15 +9,16 @@ public class Packet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "Productnaam mag niet leeg zijn.")
+    @NotEmpty(message = "Pakketnaam mag niet leeg zijn.")
     @Column(nullable = false, unique = true)
     private String packetname;
 
     @Lob
+    @Column(nullable = false)
     private String contains;
 
+    @Column(nullable = false)
     private Double price;
-    @Column()
     private int sold;
 
     public long getId() {
