@@ -1,4 +1,5 @@
 package com.jasper.pigrakker.config;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,6 +8,7 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
 
     private String Name;
+    @Getter
     private String Email;
     private String imageUrl;
 

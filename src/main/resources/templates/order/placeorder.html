@@ -9,37 +9,81 @@
 <div class="container">
     <figure class="text-center">
         <blockquote class="blockquote">
-            <h1 th:text="${product.productname}"></h1>
+            <h1 th:text="${packet.packetname}"></h1>
         </blockquote>
     </figure>
     <div class="row">
         <div class="col-md-6">
-            <h2>Bevestig Bestelling</h2>
-            <form action="#" th:action="@{/order/packet/{id}id=(packet.id)" method="post">
+            <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                            <img th:src="@{/images/Packet1.jpg}"/>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <h3 class="name" th:text="${packet.packetname}"></h3>
+                                <p class="profession" th:text="${'€' + packet.price}"></p>
+                            </div>
+                            <div class="footer">
+                                <button class="btn btn-simple" onclick="rotateCard(this)">
+                                    <i class="fa fa-mail-forward"></i> Bekijk Inhoud
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- end front panel -->
+                    <div class="back">
+                        <div class="header">
+                            <h5 class="motto">"Eet varken, varken is lekker!"</h5>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <h4 class="text-center">Inhoud:</h4>
+                                <p class="text-center" th:style="'white-space: pre-line;'" th:utext="${packet.contains}"></p>
 
-                <button class="btn btn-primary" type="submit">Bestel mar!</button>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+                                <i class="fa fa-reply"></i> Back
+                            </button>
+                            <div class="social-links text-center">
+                                <a class="btn btn-success" th:href="@{/order/packet/{id}(id=${packet.id})}">Bestel!</a>
+
+                            </div>
+                        </div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+        </div>
+
+        <div class="col-md-6">
+            <h2>Bevestig Bestelling voor <span th:text="${user.email}"></span></h2>
+
+
+            <form action="#" th:action="@{/order/packet/{id}(id=${packet.id})}" method="post">
+
+                <button class="btn btn-success" type="submit">Bestel mar!</button>
             </form>
 
         </div>
     </div>
 </div>
 <script>
-    function updatePrice() {
-        var initialPrice = parseFloat($('#price').data('price'));
-        // Get the quantity value from the input field
-        var quantity = parseInt($('#quantity').val());
-        // Calculate the new price
-        var newPrice = initialPrice * quantity;
-        // Update the price in the HTML element
-        $('#price').text('€' + newPrice.toFixed(2));
-    }
-    $(document).ready(function() {
-        // Call the updatePrice function when the quantity input changes
-        $('#quantity').on('input', function() {
-            updatePrice();
-        });
-    });
+    $().ready(function(){
+    $('[rel="tooltip"]').tooltip();
 
+});
+
+    function rotateCard(btn){
+    var $card = $(btn).closest('.card-container');
+    console.log($card);
+    if($card.hasClass('hover')){
+    $card.removeClass('hover');
+} else {
+    $card.addClass('hover');
+}
+}
 </script>
 <div th:replace="~{fragments/basicFragments :: footer}"></div>
 </body>
