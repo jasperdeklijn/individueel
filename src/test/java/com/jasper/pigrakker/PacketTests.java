@@ -1,14 +1,9 @@
 package com.jasper.pigrakker;
 
 import com.jasper.pigrakker.model.Packet;
-import com.jasper.pigrakker.model.Product;
 import com.jasper.pigrakker.repository.PacketRepository;
-import com.jasper.pigrakker.repository.ProductRepository;
-import jakarta.transaction.Transactional;
-import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
