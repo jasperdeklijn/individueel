@@ -12,8 +12,11 @@ public class Order {
     @OneToOne
     private Packet packet;
 
-    @OneToOne
-    private User user;
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String phone;
 
     @Column(nullable = false)
     private Status status;
@@ -34,12 +37,20 @@ public class Order {
         this.packet = packet;
     }
 
-    public User getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Status getStatus() {

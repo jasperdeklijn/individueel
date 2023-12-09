@@ -1,7 +1,6 @@
 
 package com.jasper.pigrakker.config;
 
-import com.jasper.pigrakker.service.CustomOidcUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,12 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -37,7 +31,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         if (authority instanceof OAuth2UserAuthority) {
                             Map<String, Object> attributes = ((OAuth2UserAuthority) authority).getAttributes();
                             String email = (String) attributes.get("email");
-                            return email != null && email.matches("jasperdeklijn@gmail.com");
+                            return email != null && (email.matches("jasperdeklijn@gmail.com") || email.matches("sandrabongers@gmail.com"));
                         }
                         return false;
                     });
@@ -68,11 +62,7 @@ public class SecurityConfig implements WebMvcConfigurer {
             return mappedAuthorities;
         };
     }
-    @Bean
-    public OidcUserService getService()
-    {
-        return new CustomOidcUserService();
-    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -87,7 +77,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .userInfoEndpoint((userInfo) -> userInfo
                                 .userAuthoritiesMapper(grantedAuthoritiesMapper())
-                                .oidcUserService(getService())
+
                         )
                 )
                 .logout(out ->
