@@ -22,7 +22,7 @@ public class PacketTests {
         packet.setPacketname("TestPacket");
         packet.setContains("TestContains");
         packet.setPrice(10.0);
-        packet.setTotalKG(5);
+        packet.setTotalKG(5.0);
         packet.setSold(2);
 
         assertEquals(1, packet.getId());
@@ -39,7 +39,7 @@ public class PacketTests {
         packet.setPacketname("TestPacket");
         packet.setContains("TestContains");
         packet.setPrice(10.0);
-        packet.setTotalKG(5);
+        packet.setTotalKG(5.0);
         packet.setSold(2);
 
         when(packetRepository.save(packet)).thenReturn(packet);

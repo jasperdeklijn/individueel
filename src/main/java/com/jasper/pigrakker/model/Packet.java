@@ -21,18 +21,18 @@ public class Packet {
     private Double price;
 
     @Column(nullable = false)
-    private int totalKG;
+    private Double totalKG;
     private int sold;
 
     public long getId() {
         return id;
     }
 
-    public int getTotalKG() {
+    public Double getTotalKG() {
         return totalKG;
     }
 
-    public void setTotalKG(int totalKG) {
+    public void setTotalKG(Double totalKG) {
         this.totalKG = totalKG;
     }
 

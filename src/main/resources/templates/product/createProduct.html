@@ -23,7 +23,7 @@
 
         <div class="col-md-5">
             <label class="col-form-label">Totaal aantal KG:
-            <input class="form-control" type="number" th:field="*{totalKG}" /></label>
+            <input class="form-control" type="number"  th:field="*{totalKG}" /></label>
             <p th:if="${#fields.hasErrors('totalKG')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{totalKG}"></p>
         </div>
         <br/>
