@@ -70,20 +70,20 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/order/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .oauth2Client(withDefaults())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .userInfoEndpoint((userInfo) -> userInfo
                                 .userAuthoritiesMapper(grantedAuthoritiesMapper())
-
                         )
+                        .loginPage("/login")
                 )
                 .logout(out ->
                         out.logoutRequestMatcher(new
                                         AntPathRequestMatcher("/logout"))
                                 .permitAll()
+                                .logoutSuccessUrl("/")
                 )
                 .build();
     }

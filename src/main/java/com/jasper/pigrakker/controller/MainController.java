@@ -32,4 +32,9 @@ public class MainController {
         return  new ModelAndView("view/onsDoel");
     }
 
+    @GetMapping("/login")
+    public ModelAndView loginForm()
+    {
+        return new ModelAndView("/login");
+    }
 }

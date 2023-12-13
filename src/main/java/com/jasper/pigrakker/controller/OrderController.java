@@ -21,12 +21,15 @@ public class OrderController {
     public ModelAndView orderConfirm(@PathVariable Long packetid, @AuthenticationPrincipal OAuth2User principal) {
         ModelAndView modelAndView = new ModelAndView("order/placeorder");
         modelAndView.addObject("packet", packetRepository.findById(packetid).get());
-        modelAndView.addObject("user", principal.getAttribute("name"));
+        if (principal != null) {
+            modelAndView.addObject("user", principal.getAttribute("name"));
+        }
         return modelAndView;
     }
     @PostMapping("/packet/{packetid}")
-    public ModelAndView confirmed(@PathVariable Long packetid, Principal principal) {
+    public ModelAndView confirmed(@PathVariable Long packetid, @AuthenticationPrincipal OAuth2User principal) {
         ModelAndView modelAndView = new ModelAndView("order/placeorder");
+
         modelAndView.addObject("packet", packetRepository.findById(packetid).get());
         modelAndView.addObject("user", principal);
         return modelAndView;

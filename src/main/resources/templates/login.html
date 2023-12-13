@@ -10,25 +10,10 @@
         <h1 th:text="${alertMessage}"></h1>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    </div>
-    <form th:action="@{/login}" class="col-md-4 mx-auto" method="post">
-        <h1>Log In</h1>
-        <div th:if="${param.error}">Ongeldige gebruikersnaam en wachtwoord.</div>
-        <div th:if="${param.logout}">Je bent uitgelogd.</div>
-
-        <div class="form-group">
-            <label for="username">Gebruikersnaam:</label>
-            <input  class="form-control" type="text" name="username" placeholder="Gebruikersnaam" id="username"/>
-        </div>
-        <br/>
-        <div class="form-group">
-            <label for="password">Wachtwoord:</label>
-            <input class="form-control" type="password" name="password" placeholder="Wachtwoord" id="password"/>
-        </div>
-        <br/>
-        <button class="btn btn-primary" type="submit">Log in</button><br/>
-        <a href="/user/register">Nog geen account?</a>
-    </form>
+    <h2>Login</h2>
+    <a th:href="@{/oauth2/authorization/google}">
+        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Google Sign-In Button"/>
+    </a>
 
 </div>
 
