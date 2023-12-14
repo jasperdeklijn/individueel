@@ -32,9 +32,7 @@
                     <p class="card-text">Verkocht(<span th:text="${product.sold}"></span>), Totaal (<span th:text="${product.totalKG}"></span>) = <span th:text="(100 / ${product.totalKG}) * ${product.sold}"></span> </p>
                 </div>
             </div>
-
         </div>
-
 
     <div th:if="${products.isEmpty()}">
         <span> Er bestaan nog geen Producten </span>

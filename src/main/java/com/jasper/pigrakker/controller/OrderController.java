@@ -69,6 +69,7 @@ public class OrderController {
         }
         order.setPacket(packet.get());
         order.setStatus(Status.NEEDSPAYREQUEST);
+        order.setDelivered(false);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("alertMessage", "Er klopt iets niet :(");
             modelAndView.setViewName("order/placeorder");

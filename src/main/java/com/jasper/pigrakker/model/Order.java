@@ -22,6 +22,9 @@ public class Order {
     @Column(nullable = false)
     private Status status;
 
+    @Column(nullable = false)
+    private Boolean delivered;
+
     public long getId() {
         return id;
     }
@@ -60,5 +63,13 @@ public class Order {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Boolean getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(Boolean delivered) {
+        this.delivered = delivered;
     }
 }

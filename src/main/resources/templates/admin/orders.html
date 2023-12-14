@@ -18,18 +18,20 @@
             <th> Tel nr. </th>
             <th> Pakket </th>
             <th> Status </th>
+            <th> Afgeleverd </th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${orders.isEmpty()}">
-            <td colspan="5"> Er bestaan nog geen bestellingen </td>
+            <td colspan="6"> Er bestaan nog geen bestellingen </td>
         </tr>
         <tr th:each="order : ${orders}"  th:attr="url=@{/admin/order/{id}(id =${order.id})}" id="row"  onclick="navigateToUrl(this)">
             <td><span th:text="${order.id}"> ID </span></td>
             <td><span th:text="${order.name}"> email </span></td>
             <td><span th:text="${order.phone}"> phone </span></td>
             <td><span th:text="${order.packet.packetname}"> pakket </span></td>
-            <td><span th:text="${order.status}"> status </span></td>
+            <td><span th:text="${T(com.jasper.pigrakker.model.EnumTranslator).translateStatus(order.status)}">Status</span></td>
+            <td><span th:text="${order.delivered ? 'Ja' : 'Nee'}"> afgeleverd </span></td>
         </tr>
 
         </tbody>
