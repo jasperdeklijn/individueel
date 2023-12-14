@@ -50,7 +50,7 @@ public class PacketTests {
         assertEquals("TestPacket", savedPacket.getPacketname());
         assertEquals("TestContains", savedPacket.getContains());
         assertEquals(10.0, savedPacket.getPrice());
-        assertEquals(5, savedPacket.getTotalKG());
+        assertEquals(5.0, savedPacket.getTotalKG());
         assertEquals(2, savedPacket.getSold());
 
         verify(packetRepository, times(1)).save(packet);

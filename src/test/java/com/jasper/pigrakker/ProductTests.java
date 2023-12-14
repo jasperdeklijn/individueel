@@ -21,12 +21,14 @@ public class ProductTests {
         Product product = new Product();
         product.setProductname("Test Product");
         product.setDescription("Test Description");
+        product.setTotalKG(20.0);
 
         Product savedProduct = productRepository.save(product);
 
         assertNotNull(savedProduct.getId());
         assertEquals("Test Product", savedProduct.getProductname());
         assertEquals("Test Description", savedProduct.getDescription());
+        assertEquals(20.0, savedProduct.getTotalKG());
 
     }
 
