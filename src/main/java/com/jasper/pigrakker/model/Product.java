@@ -17,9 +17,9 @@ public class Product {
     private String description;
 
     @Column(nullable = false)
-    private int totalKG;
+    private Double totalKG;
 
-    private int sold;
+    private Double sold;
 
 
     public long getId() {
@@ -46,19 +46,19 @@ public class Product {
         this.description = description;
     }
 
-    public int getTotalKG() {
+    public Double getTotalKG() {
         return totalKG;
     }
 
-    public void setTotalKG(int totalKG) {
+    public void setTotalKG(Double totalKG) {
         this.totalKG = totalKG;
     }
 
-    public int getSold() {
+    public Double getSold() {
         return sold;
     }
 
-    public void setSold(int sold) {
+    public void setSold(Double sold) {
         this.sold = sold;
     }
 }

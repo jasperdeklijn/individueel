@@ -30,7 +30,6 @@
 
                 <div class="card-footer">
                     <p class="card-text">Verkocht(<span th:text="${product.sold}"></span>), Totaal (<span th:text="${product.totalKG}"></span>) = <span th:text="(100 / ${product.totalKG}) * ${product.sold}"></span> </p>
-                    <a class="btn btn-success" th:href="@{/product/{id}(id=${product.id})}">Bekijk product</a>
                 </div>
             </div>
 

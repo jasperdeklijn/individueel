@@ -8,6 +8,7 @@
 body{
     background: #E3F2FD;
 }
+
 .navbar-nav .nav-item .nav-link{
     display: flex;
     flex-direction: column;
@@ -91,10 +92,6 @@ body{
 
     .navbar-nav .nav-link {
         font-size: 16px; /* Adjust as needed */
-    }
-    .doerecht{
-        display: flex;
-        flex-direction: row;
     }
     .hero-image{
         height: 250px;
@@ -375,6 +372,9 @@ pre.prettyprint{
 
 
 /*       Fix bug for IE      */
+.logincard{
+    background: none repeat scroll 0 0 #C3E0E6;
+}
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .front, .back{

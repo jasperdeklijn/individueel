@@ -2,6 +2,9 @@ package com.jasper.pigrakker.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="packets")
 public class Packet {
@@ -23,6 +26,17 @@ public class Packet {
     @Column(nullable = false)
     private Double totalKG;
     private int sold;
+
+    @OneToMany(mappedBy = "packet")
+    private Set<Order> orders = new HashSet<>();
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 
     public long getId() {
         return id;

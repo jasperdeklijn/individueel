@@ -10,13 +10,21 @@
         <h1 th:text="${alertMessage}"></h1>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <h2>Login</h2>
-    <a th:href="@{/oauth2/authorization/google}">
-        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Google Sign-In Button"/>
-    </a>
+    <br/>
+    <div class="">
+        <div class="logincard text-center card" style="max-width: 18rem;">
+            <div class="card-header"><h1>Login</h1></div>
+            <div class="card-body">
+                <p class="card-text">
+                    <a th:href="@{/oauth2/authorization/google}">
+                        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Google Sign-In Button"/>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
 
 </div>
-
 <div th:replace="~{fragments/basicFragments :: footer}"></div>
 </body>
 </html>

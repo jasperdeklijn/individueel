@@ -9,7 +9,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "packet_id")
     private Packet packet;
 
     @Column(nullable = false)
