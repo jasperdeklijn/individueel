@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments/basicFragments :: head}"></div>
+    <title>Edit</title>
+</head>
+<body>
+<div th:replace="~{fragments/basicFragments :: navbar}"></div>
+<div class="container">
+
+    <h1>Order wijzigen</h1>
+    <form action="#" th:action="@{/order/admin/{id}(id= ${order.id})}" method="post" th:object="${order}">
+        <div class="col-md-5">
+            <label class="col-form-label">Email:
+                <input class="form-control" type="text" th:field="*{name}" disabled></label>
+            <p th:if="${#fields.hasErrors('name')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{name}"></p>
+        </div>
+        <div class="col-md-5">
+            <label class="col-form-label">Tel nr:
+                <input class="form-control" type="tel" th:field="*{phone}" disabled></label>
+            <p th:if="${#fields.hasErrors('phone')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{phone}"></p>
+        </div>
+        <div class="col-md-5">
+            <label class="col-form-label">Status:
+                <select class="form-select" th:field="*{status}">
+                    <option th:each="status : ${T(com.jasper.pigrakker.model.Status).values()}"
+                            th:value="${status}" th:text="${status.displayValue}"></option>
+                </select>
+            </label>
+        </div>
+        <div class="col-md-5">
+            <div class="form-check">
+                <label class="form-check-label">Afgeleverd
+                <input class="form-check-input" type="checkbox" th:field="*{delivered}" th:checked="*{delivered}">
+                    <p th:if="${#fields.hasErrors('delivered')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{delivered}"></p>
+                </label>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Opslaan</button>
+    </form>
+</div>
+
+<div th:replace="~{fragments/basicFragments :: footer}"></div>
+</body>
+</html>

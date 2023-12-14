@@ -41,6 +41,33 @@ public class OrderController {
         modelAndView.addObject("orders", orderRepository.findAll());
         return modelAndView;
     }
+    @GetMapping("/admin/{orderid}")
+    @Secured("ROLE_ADMIN")
+    public ModelAndView EditOrder(@PathVariable Long orderid)
+    {
+        ModelAndView modelAndView = new ModelAndView("order/editOrder");
+        modelAndView.addObject("order", orderRepository.findById(orderid).get());
+        modelAndView.addObject("status", Status.values());
+
+        return modelAndView;
+    }
+    @PostMapping("/admin/{orderid}")
+    @Secured("ROLE_ADMIN")
+    public ModelAndView PostEditOrder(@PathVariable Long orderid, @Validated Order order)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<Order> currentOrder = orderRepository.findById(orderid);
+        if(currentOrder.isEmpty())
+        {
+            throw  new IllegalArgumentException();
+        }
+        currentOrder.get().setStatus(order.getStatus());
+        currentOrder.get().setDelivered(order.getDelivered());
+        orderRepository.save(currentOrder.get());
+
+        modelAndView.setViewName("redirect:/order/admin");
+        return modelAndView;
+    }
     @GetMapping("/packet/{packetid}")
     public ModelAndView orderConfirm(@PathVariable Long packetid, @AuthenticationPrincipal OAuth2User principal) {
         ModelAndView modelAndView = new ModelAndView("order/placeorder");
@@ -77,7 +104,7 @@ public class OrderController {
         }
         Product product = productRepository.findFirstProductWithLowestPercentageSold().get();
         product.setSold((product.getSold() + packet.get().getTotalKG()));
-
+        packet.get().setSold((packet.get().getSold() + 1));
         orderRepository.save(order);
         productRepository.save(product);
         modelAndView.addObject("alertMessage", "Bedankt voor uw bestelling");
