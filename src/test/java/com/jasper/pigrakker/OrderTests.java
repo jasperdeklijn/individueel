@@ -2,7 +2,6 @@ package com.jasper.pigrakker;
 
 import com.jasper.pigrakker.model.Order;
 import com.jasper.pigrakker.model.Packet;
-import com.jasper.pigrakker.model.Product;
 import com.jasper.pigrakker.model.Status;
 import com.jasper.pigrakker.repository.OrderRepository;
 import com.jasper.pigrakker.repository.ProductRepository;
