@@ -8,10 +8,7 @@ ENV MYSQL_DATABASE=pigrakker
 ENV MYSQL_USER=admin
 ENV MYSQL_PASSWORD=admin
 
-COPY docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
-
 CMD ["mysqld"]
-
 
 COPY target/pigrakker-0.0.1-SNAPSHOT.jar /app/springdemo.jar
 EXPOSE 8080
