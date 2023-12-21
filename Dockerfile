@@ -3,8 +3,6 @@ FROM openjdk:20-jdk AS builder
 
 WORKDIR /app
 
-COPY target/pigrakker-0.0.1-SNAPSHOT.jar /app/springdemo.jar
-
 # Stage 2: Create the final image with MariaDB
 FROM mariadb:latest
 
@@ -19,4 +17,4 @@ COPY --from=builder /app/springdemo.jar /app/springdemo.jar
 EXPOSE 8080
 
 # Start MariaDB and then run the Spring Boot application
-CMD ["bash", "-c", "java -jar /app/springdemo.jar"]
+ENTRYPOINT ["java", "-jar","/app.jar"]
