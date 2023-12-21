@@ -43,6 +43,7 @@ public class AdminController {
             modelAndView.addObject("alertMessage", "Dit product bestaat al!");
             return new ModelAndView("product/createProduct");
         }
+        product.setSold(0.0);
         productRepository.save(product);
         modelAndView.addObject("alertMessage", "Succesvol geregistreed!");
         return new ModelAndView("redirect:/admin/product");

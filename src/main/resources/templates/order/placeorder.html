@@ -72,17 +72,34 @@
                         <input class="form-control" type="tel" th:field="*{phone}"/></label>
                     <p th:if="${#fields.hasErrors('phone')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{phone}"></p>
                 </div>
-                <button class="btn btn-success" type="submit">Bestel mar!</button>
+                <div class="form-check">
+                    <label class="form-check-label">Ik geef toestemming voor het gebruik van mijn email en telnr voor administratie doeleinde.
+                        <input class="form-check-input" id="permission" name="permission" onchange="toggleButton()" type="checkbox">
+                        <p th:if="${#fields.hasErrors('delivered')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{delivered}"></p>
+                    </label>
+                </div>
+                <button class="btn btn-success" id="btn" type="submit" disabled="disabled">Bestel mar!</button>
             </form>
 
         </div>
     </div>
 </div>
 <script>
+
     $().ready(function(){
     $('[rel="tooltip"]').tooltip();
 
 });
+    function toggleButton() {
+        var checkBox = document.getElementById("permission");
+        var btn = document.getElementById("btn");
+
+        if (checkBox.checked === true){
+            btn.disabled = "";
+        } else {
+            btn.disabled = "disabled";
+        }
+    }
 
     function rotateCard(btn){
     var $card = $(btn).closest('.card-container');

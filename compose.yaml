@@ -5,10 +5,10 @@ services:
     image: mariadb:latest
     container_name: mariadb-container
     environment:
-      MYSQL_ROOT_PASSWORD: myrootpassword
-      MYSQL_DATABASE: pigrakker
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
     ports:
       - "3306:3306"
     volumes:
@@ -16,3 +16,4 @@ services:
 
 volumes:
   mariadb-data:
+
