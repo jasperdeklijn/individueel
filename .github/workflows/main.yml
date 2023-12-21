@@ -19,7 +19,8 @@ jobs:
           distribution: 'corretto'
           java-version: 20
       - name: Start the database container
-        run: docker-compose up -d
+        run: |
+          docker-compose up -d
           sleep 30  # Adjust the delay as needed
 
       - name: Unit Tests
