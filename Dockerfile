@@ -8,7 +8,6 @@ ENV MYSQL_DATABASE=pigrakker
 ENV MYSQL_USER=admin
 ENV MYSQL_PASSWORD=admin
 
-CMD ["mysqld"]
 
 COPY target/pigrakker-0.0.1-SNAPSHOT.jar /app/springdemo.jar
 EXPOSE 8080
