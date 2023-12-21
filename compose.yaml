@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   db:
     image: mariadb:latest
     container_name: mariadb-container
@@ -10,10 +9,13 @@ services:
       MYSQL_DATABASE: pigrakker
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
-    volumes:
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+volumes:
+  mariadb-data:
 
 
 
