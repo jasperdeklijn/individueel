@@ -20,6 +20,7 @@ jobs:
           java-version: 20
       - name: Start the database container
         run: docker-compose up -d
+          sleep 30  # Adjust the delay as needed
 
       - name: Unit Tests
         run: mvn -B test --file pom.xml
