@@ -1,5 +1,6 @@
 # Stage 1: Build the Spring Boot application
 FROM openjdk:20-jdk AS builder
+WORKDIR /app
 
 FROM mariadb:latest
 
