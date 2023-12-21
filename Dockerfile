@@ -18,5 +18,9 @@ COPY --from=builder /app/springdemo.jar /app/springdemo.jar
 # Expose the port for the Spring Boot application
 EXPOSE 8080
 
+# Copy wait-for-it script
+COPY wait-for-it.sh /usr/wait-for-it.sh
+RUN chmod +x /usr/wait-for-it.sh
+
 # Start MariaDB and then run the Spring Boot application
-CMD ["bash", "-c", "/etc/init.d/mysql start && java -jar /app/springdemo.jar"]
+CMD ["bash", "-c", "/usr/wait-for-it.sh db:3306 -- /usr/bin/mysqld_safe --skip-grant-tables & java -jar /app/springdemo.jar"]
