@@ -1,6 +1,6 @@
 FROM mariadb:latest
 
-ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_ROOT_PASSWORD=admin
 ENV MYSQL_DATABASE=pigrakker
 ENV MYSQL_USER=admin
 ENV MYSQL_PASSWORD=admin
