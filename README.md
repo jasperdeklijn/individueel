@@ -41,3 +41,5 @@ project-root
 ├── pom.xml                            # Maven Project Object Model file
 └── README.md                          # Project documentation (you are here)
 ```
+docker run -p 9090:8080 --name pigrakkerspring --net pigrakker-network -e MYSQL_HOST=pigrakker -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin -e MYSQL_PORT=3306 jasperdeklijn/individueel:today
+docker run -p 3307:3306 --name pigrakkerdb -e MYSQL_ROOT_PASSWORD=myrootpassword -e MYSQL_DATABASE=pigrakker mariadb
