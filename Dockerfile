@@ -1,15 +1,7 @@
-FROM mariadb:latest
 
-ENV MYSQL_ROOT_PASSWORD=myrootpassword
-ENV MYSQL_DATABASE=pigrakker
-ENV MYSQL_USER=admin
-ENV MYSQL_PASSWORD=admin
-CMD ["mysqld"]
 # Stage 1: Build the Spring Boot application
 FROM openjdk:20-jdk
 WORKDIR /app
-
-
 
 COPY target/pigrakker-0.0.1-SNAPSHOT.jar /app/springdemo.jar
 EXPOSE 8080
