@@ -18,19 +18,34 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Autowired
     private ProductRepository productRepository;
 
     @Autowired
     private PacketRepository packetRepository;
 
+
+    @GetMapping("/order/{orderid}/delete")
+    public ModelAndView processDeleteOrder(@PathVariable Long orderid) {
+        ModelAndView modelAndView = new ModelAndView();
+        orderRepository.deleteById(orderid);
+
+        modelAndView.addObject("alertMessage", "Order successfully deleted!");
+        modelAndView.setViewName("redirect:/order/admin");
+        return modelAndView;
+    }
+
     @GetMapping("/product/create")
-    public ModelAndView createProduct()
-    {
+    public ModelAndView createProduct() {
         ModelAndView modelAndView = new ModelAndView("product/createProduct");
         modelAndView.addObject("product", new Product());
         return modelAndView;
     }
+
     @PostMapping("/product/create")
     public ModelAndView newProduct(@Validated Product product, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -39,7 +54,7 @@ public class AdminController {
 
             return new ModelAndView("product/createProduct");
         }
-        if(productRepository.findByProductname(product.getProductname()).isPresent()) {
+        if (productRepository.findByProductname(product.getProductname()).isPresent()) {
             modelAndView.addObject("alertMessage", "Dit product bestaat al!");
             return new ModelAndView("product/createProduct");
         }
@@ -50,16 +65,16 @@ public class AdminController {
     }
 
     @GetMapping("/product/{productid}")
-    public ModelAndView editProduct(@PathVariable Long productid)
-    {
+    public ModelAndView editProduct(@PathVariable Long productid) {
         ModelAndView modelAndView = new ModelAndView("product/editProduct");
 
         modelAndView.addObject("product", productRepository.findById(productid));
         return modelAndView;
     }
+
     @PostMapping("/product/{productid}")
-    public ModelAndView editProduct(@PathVariable Long productid, @Validated Product product, BindingResult bindingResult)
-    {
+    public ModelAndView editProduct(@PathVariable Long productid, @Validated Product product,
+            BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("alertMessage", "Er klopt iets niet :(");
@@ -74,16 +89,15 @@ public class AdminController {
     }
 
     @GetMapping("/packet/{packetid}")
-    public ModelAndView editPacket(@PathVariable Long packetid)
-    {
+    public ModelAndView editPacket(@PathVariable Long packetid) {
         ModelAndView modelAndView = new ModelAndView("packet/editPacket");
 
         modelAndView.addObject("packet", packetRepository.findById(packetid));
         return modelAndView;
     }
+
     @PostMapping("/packet/{packetid}")
-    public ModelAndView editPacket(@PathVariable Long packetid, @Validated Packet packet, BindingResult bindingResult)
-    {
+    public ModelAndView editPacket(@PathVariable Long packetid, @Validated Packet packet, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("alertMessage", "Er klopt iets niet :(");
@@ -91,7 +105,7 @@ public class AdminController {
             return modelAndView;
         }
         packet.setId(packetid);
-        packet.setPrice(round(packet.getPrice(),2));
+        packet.setPrice(round(packet.getPrice(), 2));
         packetRepository.save(packet);
         modelAndView.addObject("product", productRepository.findById(packetid));
         modelAndView.setViewName("redirect:/admin/packet");
@@ -99,12 +113,12 @@ public class AdminController {
     }
 
     @GetMapping("/packet/create")
-    public ModelAndView createPacket()
-    {
+    public ModelAndView createPacket() {
         ModelAndView modelAndView = new ModelAndView("packet/createPacket");
         modelAndView.addObject("packet", new Packet());
         return modelAndView;
     }
+
     @PostMapping("/packet/create")
     public ModelAndView newPacket(@Validated Packet packet, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -113,17 +127,19 @@ public class AdminController {
 
             return new ModelAndView("packet/createPacket");
         }
-        if(packetRepository.findByPacketname(packet.getPacketname()).isPresent()) {
+        if (packetRepository.findByPacketname(packet.getPacketname()).isPresent()) {
             modelAndView.addObject("alertMessage", "Dit product bestaat al!");
             return new ModelAndView("packet/createPacket");
         }
-        packet.setPrice(round(packet.getPrice(),2));
+        packet.setPrice(round(packet.getPrice(), 2));
         packetRepository.save(packet);
         modelAndView.addObject("alertMessage", "Succesvol geregistreed!");
         return new ModelAndView("redirect:/admin/packet");
     }
+
     public static Double round(Double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
+        if (places < 0)
+            throw new IllegalArgumentException();
 
         long factor = (long) Math.pow(10, places);
         value = value * factor;
