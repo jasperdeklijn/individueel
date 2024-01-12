@@ -9,6 +9,7 @@
 <div class="container">
 
     <h1>Order wijzigen</h1>
+    
     <form action="#" th:action="@{/order/admin/{id}(id= ${order.id})}" method="post" th:object="${order}">
         <div class="col-md-5">
             <label class="col-form-label">Email:
@@ -31,7 +32,7 @@
         <div class="col-md-5">
             <div class="form-check">
                 <label class="form-check-label">Afgeleverd
-                <input class="form-check-input" type="checkbox" th:field="*{delivered}" th:checked="*{delivered}">
+                    <input class="form-check-input" type="checkbox" th:field="*{delivered}" th:checked="*{delivered}">
                     <p th:if="${#fields.hasErrors('delivered')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{delivered}"></p>
                 </label>
             </div>
@@ -39,6 +40,28 @@
 
         <button class="btn btn-primary" type="submit">Opslaan</button>
     </form>
+
+    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteOrderModal">
+        Verwijderen
+    </button>
+
+    <div class="modal fade" id="deleteOrderModal" tabindex="-1" aria-labelledby="deleteOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteOrderModalLabel">Order Verwijderen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Weet je zeker dat je deze order wilt verwijderen?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
+                    <a class="btn btn-danger" th:href="@{/admin/order/{id}/delete(id=${order.id})}">Verwijderen</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/basicFragments :: footer}"></div>
