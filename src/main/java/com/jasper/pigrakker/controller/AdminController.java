@@ -28,21 +28,14 @@ public class AdminController {
     @Autowired
     private PacketRepository packetRepository;
 
-    @GetMapping("/order/{orderid}/delete")
-    public ModelAndView deleteOrder(@PathVariable Long orderid) {
-        ModelAndView modelAndView = new ModelAndView("order/deleteOrder");
-        modelAndView.addObject("order", orderRepository.findById(orderid));
-        return modelAndView;
-    }
 
-    @PostMapping("/order/{orderid}/delete")
+    @GetMapping("/order/{orderid}/delete")
     public ModelAndView processDeleteOrder(@PathVariable Long orderid) {
         ModelAndView modelAndView = new ModelAndView();
-
         orderRepository.deleteById(orderid);
 
         modelAndView.addObject("alertMessage", "Order successfully deleted!");
-        modelAndView.setViewName("redirect:/admin/orders");
+        modelAndView.setViewName("redirect:/order/admin");
         return modelAndView;
     }
 
