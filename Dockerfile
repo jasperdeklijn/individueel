@@ -1,7 +1,7 @@
 
 FROM maven:3.9.4 AS build
 COPY . .
-RUN mvn clean package -Pprod -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM openjdk:20-jdk
 WORKDIR /app
