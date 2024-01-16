@@ -5,10 +5,10 @@ services:
     image: postgres:latest
     container_name: postgres-container
     environment:
-      MYSQL_ROOT_PASSWORD: myrootpassword
-      MYSQL_DATABASE: pigrakker
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      POSTGRES_ROOT_PASSWORD: myrootpassword
+      POSTGRES_DB: pigrakker
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
     volumes:
