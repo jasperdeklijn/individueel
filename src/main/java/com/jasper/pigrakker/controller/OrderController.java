@@ -7,6 +7,7 @@ import com.jasper.pigrakker.model.Status;
 import com.jasper.pigrakker.repository.OrderRepository;
 import com.jasper.pigrakker.repository.PacketRepository;
 import com.jasper.pigrakker.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -86,6 +87,7 @@ public class OrderController {
         modelAndView.addObject("order", order);
         return modelAndView;
     }
+    @Transactional
     @PostMapping("/packet/{packetid}")
     public ModelAndView confirmed(@PathVariable Long packetid,  @Validated Order order, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
