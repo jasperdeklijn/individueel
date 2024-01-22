@@ -1,10 +1,12 @@
 package com.jasper.pigrakker.controller;
 
+import com.jasper.pigrakker.model.Order;
 import com.jasper.pigrakker.model.Packet;
 import com.jasper.pigrakker.model.Product;
 import com.jasper.pigrakker.repository.OrderRepository;
 import com.jasper.pigrakker.repository.PacketRepository;
 import com.jasper.pigrakker.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,9 +33,13 @@ public class AdminController {
     private PacketRepository packetRepository;
 
 
+    @Transactional
     @GetMapping("/order/{orderid}/delete")
     public ModelAndView processDeleteOrder(@PathVariable Long orderid) {
         ModelAndView modelAndView = new ModelAndView();
+        Optional<Product> product = productRepository.findFirstProductWithHighestPercentageSold();
+        Optional<Order> order = orderRepository.findById(orderid);
+        product.ifPresent(value -> value.setSold((value.getSold() - order.get().getPacket().getTotalKG())));
         orderRepository.deleteById(orderid);
 
         modelAndView.addObject("alertMessage", "Order successfully deleted!");

@@ -12,5 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products WHERE totalKg > 0 ORDER BY (sold / totalKg) ASC, id ASC LIMIT 1", nativeQuery = true)
     Optional<Product> findFirstProductWithLowestPercentageSold();
 
+    @Query(value = "SELECT * FROM products WHERE totalKg > 0 ORDER BY (sold / totalKg) DESC , id ASC LIMIT 1", nativeQuery = true)
+    Optional<Product> findFirstProductWithHighestPercentageSold();
 
 }
