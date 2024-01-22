@@ -40,6 +40,8 @@ public class AdminController {
         Optional<Product> product = productRepository.findFirstProductWithHighestPercentageSold();
         Optional<Order> order = orderRepository.findById(orderid);
         product.ifPresent(value -> value.setSold((value.getSold() - order.get().getPacket().getTotalKG())));
+        Packet packet = order.get().getPacket();
+        packet.setSold(packet.getSold() - 1 );
         orderRepository.deleteById(orderid);
 
         modelAndView.addObject("alertMessage", "Order successfully deleted!");
