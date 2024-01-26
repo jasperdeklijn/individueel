@@ -27,10 +27,10 @@
 
                     <img class="img_fill" th:height="${100 /product.totalKG * product.sold + '%'}" th:src="@{/images/pigtemplateFG.png}"/>
                 </div>
-
                 <div class="card-footer">
-                    <p class="card-text">Verkocht(<span th:text="${product.sold}"></span>), Totaal (<span th:text="${product.totalKG}"></span>) = <span th:text="(100 / ${product.totalKG}) * ${product.sold}"></span> </p>
+                    <p class="card-text">Dit varken is voor <span class="percentage" th:data-total-kg="${product.totalKG}" th:data-sold-kg="${product.sold}"></span> verkocht!</p>
                 </div>
+
             </div>
         </div>
 
@@ -82,20 +82,47 @@
         </div> <!-- end col sm 3 -->
     </div>
     <script>
-        $().ready(function(){
+        $().ready(function () {
             $('[rel="tooltip"]').tooltip();
 
         });
 
-        function rotateCard(btn){
+        function rotateCard(btn) {
             var $card = $(btn).closest('.card-container');
             console.log($card);
-            if($card.hasClass('hover')){
+            if ($card.hasClass('hover')) {
                 $card.removeClass('hover');
             } else {
                 $card.addClass('hover');
             }
         }
+
+            function roundPercentage(totalKG, soldKG) {
+
+            return Math.round((soldKG / totalKG) * 100);
+
+        }
+
+
+            // Select all elements with the class "percentage"
+
+            const percentages = document.querySelectorAll('.percentage');
+
+
+            // Loop through each element and update the text with the rounded percentage
+
+            percentages.forEach(percentageElement => {
+
+            const totalKG = percentageElement.dataset.totalKg;
+
+            const soldKG = percentageElement.dataset.soldKg;
+
+            const roundedPercentage = roundPercentage(totalKG, soldKG);
+
+            percentageElement.innerText = roundedPercentage + '%';
+
+        });
+
     </script>
 
 </div>
