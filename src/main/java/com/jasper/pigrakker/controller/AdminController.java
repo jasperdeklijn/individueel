@@ -49,6 +49,19 @@ public class AdminController {
         return modelAndView;
     }
 
+    @GetMapping("/product/{productid}/delete")
+    public ModelAndView processDeletePacket(@PathVariable Long productid) {
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<Product> product = productRepository.findById(productid);
+        if(product.isPresent())
+        {
+            orderRepository.deleteById(productid);
+        }
+        modelAndView.addObject("alertMessage", "product succesvol verwijdert!");
+        modelAndView.setViewName("redirect:/admin/product");
+        return modelAndView;
+    }
+
     @GetMapping("/product/create")
     public ModelAndView createProduct() {
         ModelAndView modelAndView = new ModelAndView("product/createProduct");
