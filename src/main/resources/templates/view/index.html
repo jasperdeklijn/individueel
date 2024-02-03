@@ -64,7 +64,7 @@
                         <div class="content">
                             <div class="main">
                                 <h3 class="name" th:text="${packet.packetname}"></h3>
-                                <p class="profession" th:text="${'€' + packet.price}"></p>
+                                <p class="profession" th:text="${'€' + #numbers.formatDecimal(packet.price,2,2)}"></p>
                             </div>
                             <div class="footer">
                                 <button class="btn btn-simple" onclick="rotateCard(this)">
