@@ -257,8 +257,8 @@ body{
     margin-top: -6px;
 }
 .card .header {
-    padding: 15px 20px;
-    height: 90px;
+    padding: 15px 10px;
+    height: 70px;
 }
 .card .motto{
     font-family: 'Arima Madurai', cursive;
