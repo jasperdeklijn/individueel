@@ -50,7 +50,7 @@ public class AdminController {
     }
 
     @GetMapping("/product/{productid}/delete")
-    public ModelAndView processDeletePacket(@PathVariable Long productid) {
+    public ModelAndView processDeleteProduct(@PathVariable Long productid) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<Product> product = productRepository.findById(productid);
         if(product.isPresent())
@@ -59,6 +59,21 @@ public class AdminController {
         }
         modelAndView.addObject("alertMessage", "product succesvol verwijdert!");
         modelAndView.setViewName("redirect:/admin/product");
+        return modelAndView;
+    }
+
+    @Transactional
+    @GetMapping("/packet/{packetid}/delete")
+    public ModelAndView processDeletePacket(@PathVariable Long packetid) {
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<Packet> packet = packetRepository.findById(packetid);
+        if(packet.isPresent())
+        {
+            orderRepository.deleteAllByPacket(packet.get());
+            packetRepository.deleteById(packetid);
+        }
+        modelAndView.addObject("alertMessage", "product succesvol verwijdert!");
+        modelAndView.setViewName("redirect:/admin/packet");
         return modelAndView;
     }
 
@@ -115,7 +130,7 @@ public class AdminController {
     public ModelAndView editPacket(@PathVariable Long packetid) {
         ModelAndView modelAndView = new ModelAndView("packet/editPacket");
 
-        modelAndView.addObject("packet", packetRepository.findById(packetid));
+        modelAndView.addObject("packet", packetRepository.findById(packetid).get());
         return modelAndView;
     }
 
