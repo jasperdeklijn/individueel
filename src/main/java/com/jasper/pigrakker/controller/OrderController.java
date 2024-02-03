@@ -91,13 +91,12 @@ public class OrderController {
     @PostMapping("/packet/{packetid}")
     public ModelAndView confirmed(@PathVariable Long packetid,  @Validated Order order, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-
         Optional<Packet> packet =  packetRepository.findById(packetid);
         if(packet.isEmpty()){
             throw new IllegalArgumentException();
         }
         order.setPacket(packet.get());
-        order.setStatus(Status.NEEDSPAYREQUEST);
+        order.setStatus(Status.PICKUP);
         order.setDelivered(false);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("alertMessage", "Er klopt iets niet :(");

@@ -1,9 +1,9 @@
 package com.jasper.pigrakker.model;
 
 public enum Status {
-    NEEDSPAYREQUEST("Heeft betaalverzoek nodig"),
-    NEEDSTOPAY("Heeft nog niet betaald"),
-    HASPAYED("Heeft betaald");
+    PICKUP("Komt afhalen"),
+    WANTAPPOINTMENT("Wil afspraak maken"),
+    HASAPPOINTMENT("Heeft afspraak gemaakt");
     private final String displayValue;
 
     private Status(String displayValue) {

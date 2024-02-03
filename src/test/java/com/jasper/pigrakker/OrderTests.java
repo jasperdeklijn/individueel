@@ -40,7 +40,7 @@ public class OrderTests {
         order.setPacket(packet);
         order.setName("John Doe");
         order.setPhone("123-456-7890");
-        order.setStatus(Status.NEEDSPAYREQUEST);
+        order.setStatus(Status.PICKUP);
         order.setDelivered(false);
 
         // When
@@ -53,7 +53,7 @@ public class OrderTests {
         assertNotNull(savedOrder);
         assertEquals("John Doe", savedOrder.getName());
         assertEquals("123-456-7890", savedOrder.getPhone());
-        assertEquals(Status.NEEDSPAYREQUEST, savedOrder.getStatus());
+        assertEquals(Status.PICKUP, savedOrder.getStatus());
         assertEquals(false, savedOrder.getDelivered());
         assertEquals(packet, savedOrder.getPacket());
     }
