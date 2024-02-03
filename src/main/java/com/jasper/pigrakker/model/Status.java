@@ -3,7 +3,8 @@ package com.jasper.pigrakker.model;
 public enum Status {
     PICKUP("Komt afhalen"),
     WANTAPPOINTMENT("Wil afspraak maken"),
-    HASAPPOINTMENT("Heeft afspraak gemaakt");
+    HASAPPOINTMENT("Heeft afspraak gemaakt"),
+    NOTPAYED("NIET BETAALD!");
     private final String displayValue;
 
     private Status(String displayValue) {
