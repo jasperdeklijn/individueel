@@ -108,7 +108,7 @@ public class OrderController {
         packet.get().setSold((packet.get().getSold() + 1));
         orderRepository.save(order);
         productRepository.save(product);
-        modelAndView.addObject("alertMessage", "Bedankt voor uw bestelling");
+        modelAndView.addObject("alertMessage", "Bedankt voor uw bestelling. Afhalen op hofsteeweg 3 Uden. Zie nieuws voor afhaaltijden. Of mail naar pigrakkers@gmail.com om een afspraak te maken.");
         modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
