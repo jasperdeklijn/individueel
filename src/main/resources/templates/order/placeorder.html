@@ -61,12 +61,12 @@
             <form action="#" th:action="@{/order/packet/{id}(id=${packet.id})}" th:object="${order}" method="post">
                 <div class="col-md-6">
                     <label class="col-form-label">Email:
-                        <input class="form-control" type="email" th:field="*{name}"/></label>
+                        <input class="form-control" type="email" required th:field="*{name}"/></label>
                     <p th:if="${#fields.hasErrors('name')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{name}"></p>
                 </div>
                 <div class="col-md-6">
                     <label class="col-form-label">Tel nr.:
-                        <input class="form-control" type="tel" th:field="*{phone}"/></label>
+                        <input class="form-control" type="tel" required th:field="*{phone}"/></label>
                     <p th:if="${#fields.hasErrors('phone')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{phone}"></p>
                 </div>
                 <div class="form-check">
