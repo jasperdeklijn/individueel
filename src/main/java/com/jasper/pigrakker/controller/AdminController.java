@@ -55,7 +55,7 @@ public class AdminController {
         Optional<Product> product = productRepository.findById(productid);
         if(product.isPresent())
         {
-            orderRepository.deleteById(productid);
+            productRepository.deleteById(productid);
         }
         modelAndView.addObject("alertMessage", "product succesvol verwijdert!");
         modelAndView.setViewName("redirect:/admin/product");
@@ -91,7 +91,7 @@ public class AdminController {
     public ModelAndView editProduct(@PathVariable Long productid) {
         ModelAndView modelAndView = new ModelAndView("product/editProduct");
 
-        modelAndView.addObject("product", productRepository.findById(productid));
+        modelAndView.addObject("product", productRepository.findById(productid).get());
         return modelAndView;
     }
 
