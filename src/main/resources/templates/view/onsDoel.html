@@ -7,7 +7,20 @@
 <body>
 <div th:replace="~{fragments/basicFragments :: navbar}"></div>
 <div class="container">
-    dit wordt de Ons Doel pagina
+    <div class="row">
+        <div class="col-md-8">
+            Hoi allemaal… mijn naam is Rene de Klijn en ik doe voor de tweede keer mee met Alpe du zes. Ik
+            probeer zoveel mogelijk geld in te zamelen voor kwf om deze ziekte te bestrijden of om de
+            leefkwaliteit zoveel mogelijk te verbeteren!
+            Als actie heb ik twee varkens gesponsord gekregen van de familie vd Oever uit Breugel, het voer is
+            voor een deel gesponsord door de familie van Alphen uit Bruchem en de rest door Arthur
+            Gerrits, waarvoor mijn hartelijke dank.
+        </div>
+        <div class="col-md-4">
+            <img th:src="@{/images/youngpig.jpg}" class="rounded img-fluid">
+        </div>
+    </div>
+
 </div>
 
 <div th:replace="~{fragments/basicFragments :: footer}"></div>
