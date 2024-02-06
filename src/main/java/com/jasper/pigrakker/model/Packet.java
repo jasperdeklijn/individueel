@@ -27,11 +27,23 @@ public class Packet {
     private Double totalKG;
     private int sold;
 
+    @Column(nullable = true, columnDefinition = "Integer default 1")
+    private Integer imageID;
+
     @OneToMany(mappedBy = "packet")
     private Set<Order> orders = new HashSet<>();
 
     public Set<Order> getOrders() {
         return orders;
+    }
+
+
+    public Integer getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(Integer imageID) {
+        this.imageID = imageID;
     }
 
     public void setOrders(Set<Order> orders) {

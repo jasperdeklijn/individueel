@@ -33,8 +33,13 @@
         <br/>
         <div class="col-md-5">
             <label class="col-form-label">Totaal aantal verkocht:
-                <input class="form-control" type="number" th:field="*{sold}" disabled></label>
+                <input class="form-control" type="number" th:field="*{sold}" ></label>
             <p th:if="${#fields.hasErrors('sold')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{sold}"></p>
+        </div>
+        <div class="col-md-5">
+        <label class="col-form-label">Afbeelding nummer:
+            <input class="form-control" type="number" min="1" max="3" th:field="*{imageID}"></label>
+        <p th:if="${#fields.hasErrors('imageID')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{imageID}"></p>
         </div>
         <button class="btn btn-primary" type="submit">Opslaan</button>
     </form>
