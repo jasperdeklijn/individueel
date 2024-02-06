@@ -120,6 +120,7 @@ public class AdminController {
             return modelAndView;
         }
         product.setId(productid);
+
         productRepository.save(product);
         modelAndView.addObject("product", productRepository.findById(productid));
         modelAndView.setViewName("redirect:/admin/product");

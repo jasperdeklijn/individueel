@@ -29,7 +29,7 @@
         <br/>
         <div class="col-md-5">
             <label class="col-form-label">Totaal aantal verkocht:
-                <input class="form-control" type="number" step="0.01" th:field="*{sold}" disabled></label>
+                <input class="form-control" type="number" step="0.01" th:field="*{sold}"></label>
             <p th:if="${#fields.hasErrors('totalKG')}" class="alert alert-danger form-text" th:errorclass="error" th:errors="*{sold}"></p>
         </div>
         <button class="btn btn-primary" type="submit">Opslaan</button>
