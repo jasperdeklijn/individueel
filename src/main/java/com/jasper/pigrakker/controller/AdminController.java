@@ -171,6 +171,7 @@ public class AdminController {
             return new ModelAndView("packet/createPacket");
         }
         packet.setPrice(round(packet.getPrice(), 2));
+        packet.setActive(true);
         packetRepository.save(packet);
         modelAndView.addObject("alertMessage", "Succesvol geregistreed!");
         return new ModelAndView("redirect:/admin/packet");

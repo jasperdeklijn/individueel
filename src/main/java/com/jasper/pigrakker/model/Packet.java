@@ -30,6 +30,9 @@ public class Packet {
     @Column(nullable = true, columnDefinition = "Integer default 1")
     private Integer imageID;
 
+    @Column(nullable = true, columnDefinition = "Boolean default true")
+    private Boolean active;
+
     @OneToMany(mappedBy = "packet")
     private Set<Order> orders = new HashSet<>();
 
@@ -37,6 +40,14 @@ public class Packet {
         return orders;
     }
 
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public Integer getImageID() {
         return imageID;
