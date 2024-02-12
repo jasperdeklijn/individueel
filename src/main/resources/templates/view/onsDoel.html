@@ -28,18 +28,18 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <video  class="d-block w-100 h-100">
+                    <video controls="controls" preload="none" onclick="this.play()"  class="d-block w-100 h-100">
                         <source th:src="@{/images/video1.mp4}" type="video/mp4">
                     </video>
 
                 </div>
                 <div class="carousel-item">
-                    <video  class="d-block w-100 h-100">
-                        <source th:src="@{/images/video2.mp4}" type="video/mp4">
+                    <video controls="controls" preload="none" onclick="this.play()" class="d-block w-100 h-100">
+                        <source  th:src="@{/images/video2.mp4}" type="video/mp4">
                     </video>
                 </div>
                 <div class="carousel-item">
-                    <video class="d-block w-100 h-100">
+                    <video controls="controls" preload="none" onclick="this.play()" class="d-block w-100 h-100">
                         <source th:src="@{/images/video3.mp4}" type="video/mp4">
                     </video>
                 </div>
