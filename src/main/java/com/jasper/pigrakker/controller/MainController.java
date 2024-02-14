@@ -1,8 +1,6 @@
 package com.jasper.pigrakker.controller;
 
 import com.jasper.pigrakker.model.Order;
-import com.jasper.pigrakker.model.Product;
-import com.jasper.pigrakker.model.Status;
 import com.jasper.pigrakker.repository.OrderRepository;
 import com.jasper.pigrakker.repository.PacketRepository;
 import com.jasper.pigrakker.repository.ProductRepository;
@@ -12,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 
 @Controller
@@ -55,26 +53,22 @@ public class MainController {
         int totalOrders = orders.size();
         int reserved = 0;
         int sold = 0;
-
-        for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).getDelivered()) {
-                reserved ++;
-            }else {
-                sold++;
-            }
-        }
-        List<Product> products = productRepository.findAll();
         Double totalKg = 0.0;
-        for (int i = 0; i < products.size(); i++)
-        {
-            totalKg += products.get(i).getSold();
+        for (int i = 0; i < totalOrders; i++) {
+            if (orders.get(i).getDelivered()) {
+                sold++;
+            }else {
+                reserved ++;
+            }
+            totalKg += orders.get(i).getPacket().getTotalKG();
         }
 
-        Map<String, Integer> graphData = new TreeMap<>();
-        graphData.put("Niet Verkocht", totalOrders - reserved - sold);
-        graphData.put("Gereserveer", reserved);
+
+        Map<String, Integer> graphData = new HashMap<>();
+        graphData.put("Niet Verkocht", (totalOrders - reserved - sold));
+        graphData.put("Gereserveerd", reserved);
         graphData.put("Verkocht", sold);
         modelAndView.addObject("chartData", graphData);
-        return new ModelAndView("view/details");
+        return modelAndView;
     }
 }
