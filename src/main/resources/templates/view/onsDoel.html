@@ -20,7 +20,7 @@
     <div class="row">
         <h2> Video's door Irene gemaakt</h2>
         <!-- Carousel wrapper -->
-        <div id="carouselExampleIndicators" class="carousel slide col-md-6" data-bs-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide col-md-6" >
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -28,19 +28,19 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <video autoplay loop muted class="d-block w-100 h-100">
-                        <source th:src="@{/images/video1.mp4}">
+                    <video controls="controls" preload="none" onclick="this.play()"  class="d-block w-100 h-100">
+                        <source th:src="@{/images/video1.mp4}" type="video/mp4">
                     </video>
 
                 </div>
                 <div class="carousel-item">
-                    <video autoplay loop muted class="d-block w-100 h-100">
-                        <source th:src="@{/images/video2.mp4}">
+                    <video controls="controls" preload="none" onclick="this.play()" class="d-block w-100 h-100">
+                        <source  th:src="@{/images/video2.mp4}" type="video/mp4">
                     </video>
                 </div>
                 <div class="carousel-item">
-                    <video autoplay loop muted class="d-block w-100 h-100">
-                        <source th:src="@{/images/video3.mp4}">
+                    <video controls="controls" preload="none" onclick="this.play()" class="d-block w-100 h-100">
+                        <source th:src="@{/images/video3.mp4}" type="video/mp4">
                     </video>
                 </div>
             </div>
