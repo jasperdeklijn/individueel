@@ -1,15 +1,18 @@
 package com.jasper.pigrakker.controller;
 
 import com.jasper.pigrakker.model.Order;
+import com.jasper.pigrakker.model.Packet;
 import com.jasper.pigrakker.repository.OrderRepository;
 import com.jasper.pigrakker.repository.PacketRepository;
 import com.jasper.pigrakker.repository.ProductRepository;
+import com.nimbusds.jose.shaded.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,27 +53,36 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView("view/details");
 
         modelAndView.addObject("chartData", getMoneyData());
+        modelAndView.addObject("barData",getBarData());
         return modelAndView;
     }
 
-    private Map<String, Integer> getChartData() {
-        List<Order> orders = orderRepository.findAll();
-        int totalOrders = orders.size();
-        int reserved = 0;
-        int sold = 0;
+    private Map<String, Object> getBarData() {
+        List<Packet> packets = packetRepository.findAll();
 
-        for (int i = 0; i < totalOrders; i++) {
-            if (orders.get(i).getDelivered()) {
-                sold++;
-            } else {
-                reserved++;
+        Map<String, Object> graphData = new HashMap<>();
+        graphData.put("cols", new String[]{"Pakket", "Verkocht", "Reserveerd"});
+        List<Object[]> rows = new ArrayList<>();
+        for (int i = 0; i < packets.size(); i++) {
+            List<Order> orderPackets = orderRepository.findAllByPacket(packets.get(i));
+            int soldPackets = 0;
+            int reservedPackets = 0;
+            for(int y = 0; y < orderPackets.size(); y++)
+            {
+                if (orderPackets.get(y).getDelivered()) {
+                    soldPackets ++;
+                } else {
+                    reservedPackets ++;
+                }
             }
+            rows.add(new Object[]{
+                    packets.get(i).getPacketname(), soldPackets, reservedPackets
+            });
         }
-
-        Map<String, Integer> graphData = new HashMap<>();
-        graphData.put("Gereserveerd", reserved);
-        graphData.put("Verkocht", sold);
-
+        graphData.put("rows",rows);
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(graphData);
+        System.out.println(jsonData); // Print the JSON data to see its content
         return graphData;
     }
     private Map<String, Integer> getMoneyData() {

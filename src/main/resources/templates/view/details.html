@@ -33,35 +33,47 @@
                 ['[(${entry.key})]', [[${entry.value}]]],
                 /*[/]*/
                 ]
-
             );
 
             // Set chart options
             var options = {'title':'Hoeveel er gekocht is en hoeveel gereserveerd',
-                'width':400,
                 'is3D': true,
-                'height':300};
+                'height': 400,
+                colors: ['green', 'lightgreen'],
+            };
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('soldchart_div'));
             chart.draw(data, options);
         }
+
         function packetChart()
         {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Sales', 'Expenses', 'Profit'],
-                ['2014', 1000, 400, 200],
-                ['2015', 1170, 460, 250],
-                ['2016', 660, 1120, 300],
-                ['2017', 1030, 540, 350]
-            ]);
 
+            var chartCols = [[${barData.cols}]];
+            var chartRows = [[${barData.rows}]];
+
+            // Convert the data to Google DataTable format
+            // Convert the data to Google DataTable format
+            var data = new google.visualization.DataTable();
+
+// Add columns
+            chartCols.forEach(function(col, index) {
+                data.addColumn(typeof chartRows[0][index], col);
+            });
+
+// Add rows
+            chartRows.forEach(function(row) {
+                data.addRow(row);
+            });
             var options = {
                 chart: {
-                    title: 'Company Performance',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                    title: 'Verkochte pakketten',
                 },
-                bars: 'horizontal' // Required for Material Bar Charts.
+                bars: 'vertical', // Required for Material Bar Charts.
+                isStacked: true,
+                colors: ['green'],
+                'height':400
             };
 
             var chart = new google.charts.Bar(document.getElementById('packetchart_div'));
