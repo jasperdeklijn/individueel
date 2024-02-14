@@ -48,27 +48,49 @@ public class MainController {
     public ModelAndView details()
     {
         ModelAndView modelAndView = new ModelAndView("view/details");
-        List<Order> orders = orderRepository.findAll();
 
+        modelAndView.addObject("chartData", getMoneyData());
+        return modelAndView;
+    }
+
+    private Map<String, Integer> getChartData() {
+        List<Order> orders = orderRepository.findAll();
         int totalOrders = orders.size();
         int reserved = 0;
         int sold = 0;
-        Double totalKg = 0.0;
+
         for (int i = 0; i < totalOrders; i++) {
             if (orders.get(i).getDelivered()) {
                 sold++;
-            }else {
-                reserved ++;
+            } else {
+                reserved++;
             }
-            totalKg += orders.get(i).getPacket().getTotalKG();
         }
 
-
         Map<String, Integer> graphData = new HashMap<>();
-        graphData.put("Niet Verkocht", (totalOrders - reserved - sold));
         graphData.put("Gereserveerd", reserved);
         graphData.put("Verkocht", sold);
-        modelAndView.addObject("chartData", graphData);
-        return modelAndView;
+
+        return graphData;
+    }
+    private Map<String, Integer> getMoneyData() {
+        List<Order> orders = orderRepository.findAll();
+        int totalOrders = orders.size();
+        Double CashEarned = 0.0;
+        Double CashReserved = 0.0;
+
+        for (int i = 0; i < totalOrders; i++) {
+            if (orders.get(i).getDelivered()) {
+                CashEarned += orders.get(i).getPacket().getPrice();
+            } else {
+                CashReserved += orders.get(i).getPacket().getPrice();
+            }
+        }
+
+        Map<String, Integer> graphData = new HashMap<>();
+        graphData.put("Opgehaald", CashEarned.intValue());
+        graphData.put("Nog niet", CashReserved.intValue());
+
+        return graphData;
     }
 }
