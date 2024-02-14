@@ -15,11 +15,10 @@
     <script type="text/javascript" th:inline="javascript">
 
         // Load the Visualization API and the corechart package.
-        google.charts.load('current', {'packages':['corechart']});
-
+        google.charts.load('current', {'packages':['corechart','bar']});
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(soldChart);
-
+        google.charts.setOnLoadCallback(packetChart);
         // Callback that creates and populates a data table,
         // instantiates the pie chart, passes in the data and
         // draws it.
@@ -40,14 +39,38 @@
             // Set chart options
             var options = {'title':'Hoeveel er gekocht is en hoeveel gereserveerd',
                 'width':400,
+                'is3D': true,
                 'height':300};
 
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.PieChart(document.getElementById('soldchart_div'));
             chart.draw(data, options);
         }
+        function packetChart()
+        {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Sales', 'Expenses', 'Profit'],
+                ['2014', 1000, 400, 200],
+                ['2015', 1170, 460, 250],
+                ['2016', 660, 1120, 300],
+                ['2017', 1030, 540, 350]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Company Performance',
+                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                },
+                bars: 'horizontal' // Required for Material Bar Charts.
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('packetchart_div'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
     </script>
-    <div id="chart_div"></div>
+    <div id="soldchart_div"></div>
+    <div id="packetchart_div"></div>
 </div>
 <div th:replace="~{fragments/basicFragments :: footer}"></div>
 </body>
