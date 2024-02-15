@@ -61,7 +61,7 @@ public class MainController {
         List<Packet> packets = packetRepository.findAll();
 
         Map<String, Object> graphData = new HashMap<>();
-        graphData.put("cols", new String[]{"Pakket", "Verkocht", "Reserveerd"});
+        graphData.put("cols", new String[]{"Pakket", "Verkocht", "Gereserveerd"});
         List<Object[]> rows = new ArrayList<>();
         for (int i = 0; i < packets.size(); i++) {
             List<Order> orderPackets = orderRepository.findAllByPacket(packets.get(i));
